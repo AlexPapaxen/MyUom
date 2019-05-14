@@ -14,12 +14,6 @@ public class Main {
 		//re.printCoursesStats();
 		//re.printCourses();
 		
-		//test for github
-		
-	    System.out.println("test for github");
-	    
-	    //test 2 for github 2222222
-	    System.out.println("test 2 for github");
 		
 		File myDir = new File("C:\\Users\\GEORGE MICHOS\\eclipse-workspace\\MyUom");
 		File lessons = new File(myDir, "lessons.txt");
