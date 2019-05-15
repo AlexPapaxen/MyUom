@@ -1,0 +1,2501 @@
+From 3e06cf3b88d1bccac683cb6f15b9bc4a6d205424 Mon Sep 17 00:00:00 2001
+From: papsavas <papsavas@hotmail.com>
+Date: Wed, 15 May 2019 23:04:39 +0300
+Subject: [PATCH] no message
+
+---
+ .settings/org.eclipse.core.resources.prefs |   1 +
+ bin/.gitignore                             |   9 +-
+ bin/CheckBoxGUI$1ActionHandler.class       | Bin 6398 -> 7012 bytes
+ bin/CheckBoxGUI$1ItemHandler.class         | Bin 10130 -> 2491 bytes
+ bin/CheckBoxGUI.class                      | Bin 12015 -> 11478 bytes
+ bin/Course.class                           | Bin 1158 -> 1792 bytes
+ bin/CourseStats.class                      | Bin 2402 -> 2345 bytes
+ bin/Main$1.class                           | Bin 738 -> 738 bytes
+ bin/Main.class                             | Bin 1918 -> 1743 bytes
+ bin/MyProfileGUI$1.class                   | Bin 647 -> 799 bytes
+ bin/MyProfileGUI$2.class                   | Bin 672 -> 672 bytes
+ bin/MyProfileGUI$3.class                   | Bin 679 -> 679 bytes
+ bin/MyProfileGUI$4.class                   | Bin 1303 -> 1303 bytes
+ bin/MyProfileGUI.class                     | Bin 3263 -> 3183 bytes
+ bin/RankGUI.class                          | Bin 4056 -> 3978 bytes
+ bin/ShowResultsGUI.class                   | Bin 2181 -> 2091 bytes
+ bin/XlsReader.class                        | Bin 6021 -> 5876 bytes
+ lessons.txt                                |   7 -
+ src/CheckBoxGUI.java                       | 829 ++++-----------------
+ src/Main.java                              |   3 +
+ src/MainFrame.java                         | 164 ++++
+ src/MyProfileGUI.java                      |  16 +-
+ 22 files changed, 324 insertions(+), 705 deletions(-)
+ delete mode 100644 lessons.txt
+ create mode 100644 src/MainFrame.java
+
+diff --git a/.settings/org.eclipse.core.resources.prefs b/.settings/org.eclipse.core.resources.prefs
+index 6bf5c6c..0f00a7e 100644
+--- a/.settings/org.eclipse.core.resources.prefs
++++ b/.settings/org.eclipse.core.resources.prefs
+@@ -1,2 +1,3 @@
+ eclipse.preferences.version=1
+ encoding//src/Main.java=UTF-8
++encoding/<project>=UTF-8
+diff --git a/bin/.gitignore b/bin/.gitignore
+index b6afb8a..f7602f3 100644
+--- a/bin/.gitignore
++++ b/bin/.gitignore
+@@ -1,13 +1,14 @@
+-/CheckBoxGUI$1ActionHandler.class
++/CheckBoxGUI$1ActionHandler$1.class
+ /CheckBoxGUI$1ItemHandler.class
++/CheckBoxGUI$1ActionHandler.class
+ /CheckBoxGUI.class
+ /Course.class
+ /CourseStats.class
+ /Main$1.class
+ /Main.class
++/MyProfileGUI$3.class
+ /MyProfileGUI$1.class
+ /MyProfileGUI$2.class
+-/MyProfileGUI$3.class
+ /MyProfileGUI$4.class
+ /MyProfileGUI.class
+ /RankGUI$1.class
+@@ -16,3 +17,7 @@
+ /ShowResultsGUI$1.class
+ /ShowResultsGUI.class
+ /XlsReader.class
++/MainFrame.class
++/MainFrame$1ActionHandler.class
++/MainFrame$1ActionHandler$1.class
++/MyProfileGUI$1$1.class
+diff --git a/bin/CheckBoxGUI$1ActionHandler.class b/bin/CheckBoxGUI$1ActionHandler.class
+index 9e8495a3194b8b44676333248fee86be7181f777..9065521fd91af1dc1c256fade313432a95b113f8 100644
+GIT binary patch
+literal 7012
+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
+RMR*?0nK+#FwfxIJ{{{?&o$mku
+
+literal 6398
+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
+Nlr{OmBXjl{@E>^$^jrV{
+
+diff --git a/bin/CheckBoxGUI$1ItemHandler.class b/bin/CheckBoxGUI$1ItemHandler.class
+index b1cf2fd9b9c3e43d30b6a45bca5fb2468ee058c1..a61948666b3aecf1d8225ffdc111337c19e8526a 100644
+GIT binary patch
+literal 2491
+zcmaJ@TW?fV7+v4YnM<b!dMLC|rp1CSv_qk^3aF)}Pznqd5LybNf~PYZdgxqm&a_mY
+zk;I=MPgRLch>0QEAreJ>@Wn)<F~k_7@x>RT#%oMez_rgz%M7Avru*A_f0wns%bxl0
+z*0t*ZwjdvZPq1QOTqP!UW~cWYiMMpc^D4d9&LmSR7lI+M&e&6SXUfi;?mRelMkQzy
+z6hysK`&_<LO{q-2Q(Fx=ZeC?nP7utGJ8sJ+!J?ru-#y$<*{PO9Ha(VQxLtzfL)y=D
+zr+dz!|9u0co4YlK1*W#NbBVF+v~mS?o?+)?-br=t$mQ&3b#R&mwOURIs)vrH+{4OF
+zs+>OF=470FpWsAW1)~25|9{7K$1ID}J}NK<vPo41!7>vegtb&}q6!f$tuRqtlvbKB
+zu}GganpljQ2>e)O!oqz5f17qxGvs8{fywlk%8l4#DN?E($|mg8sGW24zI15lR0~#?
+z)2b*U*;@{)Gn}{cYG9moR7pWoTQPx^6&%#H>}em3U>({+Xk(u5SsxQItf$}8DnG1J
+z><N{OXOe2#!yb>2)dmwA(J2TItF&TUuqlkTc)NGkWuhAo@NSorbtW9wDc&)vV6(}#
+z<X!dPDLa?Wx@nc+b--&f&GH^?R|L)8BE!VQe*0`GGgYoipLB|_BrcF?9iY#|cJx!*
+zRr&ee)D0DAi^p}^Wtb!qV@?FSusei7!BQ_~Wv7|ggS}K_0+=HbD*`K<lAaLu{VRQ?
+zIg22UArt#`u?=@Tdrlu5H1QY?kvW0QCsilrxGu*qj)X8Gs9I=h6QelFE+K+}>}1YW
+zt}ZZ%EN?4;sYFaXkJEWk*Hew)7@jckB%Tt4=;nZ(W|J+OH}|*<=W`s)9*ys$iKk&x
+zmH0-~w8y)QbxBi$jU!<q>5&_El1gXtl!?>2V+_}MjzI!$-p<j3UuD>fH3^*;4t63t
+znekdBn3%5{iys*#zl7TD=ozr)YsR-~qb>~12Q!IO)+NsUDnFi0hVYCgdgo2!;}OsB
+zT^dN)F7w38vNsORYzjX=0R${dk1Sx->VfrEj;ptFSiO~_%9k_9kA)?)s-?6KKJTPC
+zwtfyvV;ys-i*1<0@>qj0hlW@~U=GpPRWx0pu8;Awy#VqeR#P^$%+ocvpR1q+t^BY3
+zzCc_)u3KYoqOO3o7wI=fc{$|*Itth{i>A_@F@xI5%LjEhKOF-rH9UD45qSj-atV#{
+zD%Qy?w#a1<LVYnz2?7K1?;(PCn6?IdjSZAJ%_Uf~)b{fx7U+#$L^#kpi{>cfheMR=
+zqk$PzSwV``(clb%R=BtEHEI`;Y|&|y*ZHk;h2J7?AS`pJmI5rfiduOKb#e_W<!v;{
+zbu`PnXqET*3Vq<AY%WG!KpDd$=piN_+OUn1&%;{<<8QjGiiCK@r=$e>9U5!U{r+B!
+z(2V)R1rTI+G&F<7F)L_Qd;2v}i>P^ET9$XPBx;3cP#v?DSWJ5Foun42d_*cABP5?-
+zk$g%TpOL~1!vCD`zrb4g5*y_!bjjD)D&Jtcd|O7Pe}PIrc9f{}VP_>3OKPk|B*7Q6
+zMCCGx=(gy)Cy{m5`br`lR#zpFZfkP|k#4pi<U0i9dnWD&ES4X!RDMEKe#R>K1ugO`
+zI^;LL=D%aJ{DEHiv#e|S7D)7!Na(H!!dP6y&BwNgTXg*byu0A<i*7Myv74>i&{V*{
+zdx#hCXxYwRz=5(Y#b^PC>kLo#SOLciIC0)D=MAYd8ZX_x)}-CFYKxK%{f(7xwL?!^
+z9~Piqx_#qLA&dNPvXHmfkGE0J<hJr>(V)-AH~tn5`2slV3*wY7gel6;`>H(tecsSt
+zSm1vF<6aTT5RO+wAI{?pCCz&X6O;^$pbIHa(s?pr++<Ms3p=Y<Q!mXkA2P^tHE<TI
+NkfWr(w}h(;`~yGc31a{N
+
+literal 10130
+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
+
+diff --git a/bin/CheckBoxGUI.class b/bin/CheckBoxGUI.class
+index aca52611990f036a237b2feef0953980c3c61aa2..a90c54b0a979e89d15d912903238b82008fc1e57 100644
+GIT binary patch
+literal 11478
+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
+K_y*oR!~8e+oQ22$
+
+literal 12015
+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
+GXZ{Z_qVl=`
+
+diff --git a/bin/Course.class b/bin/Course.class
+index cf008c631ea9a88524ad8d84c1ab007a59e6cecd..cd73d12aa9e3c8f489adac5305655cc831b2bb71 100644
+GIT binary patch
+literal 1792
+zcmbVL-)~c87=FI4KTf-|4ZF=**GeZK?U`jmox+%k8$%~$AjK+%#GJJ!qu8}e+nIPL
+zVR~nbiC0DwF1X}}P3%fwz`Yk=|0DHz&lyA8Ub!sid-{IwukU%@_s_o`J^}DHz6imm
+z5L~Km)#^?NeuV?q?XT^bvRzr9xv+NKDKr%P*Lba<Rulq7`y2h6!T?W&X!f~tu2Cyh
+z)=$y9VsALiSt#4}I>S6rR|pqNHRdZ-D+)&4*>LI&NA4F&l~Ut9g)dXR=~h;HZU4`b
+z&a<_pYSD>c0HY>GFve%3()lnHUNjLvP|!;zLLPeAL<C{6#Z8zVdd0*b!UmEG!}@34
+z>U`JP)^|HMbW{9ZHDSo@VTFjkP3wK$whg={-nZ$!t?zVhc(#;+sc-4KdbjhfXR*j9
+zEltVRxv3vYc70FszHVa3tAEVIFv1EW*;2(>-P%}lYM1S`GU<+Hs|CB9w`(Q&y=U|{
+zu9Zl<k@fVYI77LHUHIy}z3F;{F!vw9Jq;Pqs6K;ZsdO*jA)Hj0=+=I5t5hyJH3O_O
+ztbf%_{Xn<%u5QjJBRGL~g>%Y0-bdziUOY~l_yCKX2zztWsT375{akz6*{gfXz!`<X
+zBrCg$%qI<;<<uqhk3y-}#79zsa~w~t^uFtPqH_vk^Ru%_{gb}WS3IT8HzkFE^W-o|
+zF?aPn?`Z}uP>*H(MBkyItsm>B;`a#&O6p%I<u--<K|i3FkC~+H^^r5VeD5fP)}6+x
+zyDwp)C0QBSlxLXhF-V--UzSLYt5|T(mPGSGPu6211g1DB1Keo?KAB}ApG>lQaw^@E
+z^X#6SVfW-zyC<j1Jvm!EgUmF71N^=Ks72;6Xf0T6M6E;%<5s+d32VBAm=z1OFloj7
+zEhOUpTL@dxgDp(O11>xyFzCV~0z)o5D$sCYn$U`cT9~$C!4@)2mKnedzpEJKcL;tN
+zcQ!N3c1GDw3{e~;I*f5xn4oVAbC|?D5;)D9WzujChj0-`kjGJ6MG9;5oMpC4-ZO9<
+zZ}1l%B<syb3NrX;pNoV#p|K!~&iaCcrhtp28=<ry3rTw4B%VUxZ<a7ZP$9gf<g@<|
+zMEJ)d6x-ty-!r`wz4{0zu0-eCSg`&;YzOa0m-r!`61?o;@f~~^{n*0^v1dIzDR|Yx
+z8NnAlJk4VVmwsn{pG%}@31nOXOt0=90ScG*dz#^m_yweu?%?D93J&ZCf7&;AvO9RL
+dZ*abEaH2c-WZ&S=`UYpZgBSV+f9^7K<sWb>gR=kt
+
+literal 1158
+zcmbu7&2AGh5Xb)xX|mY_QbNo3hZDY9siGVzgec+?ffOk!hd`yCkh5zgF1vQ+btC!`
+zJOZzQ1QHy$@lc3ycA-dFAq6g;u|4zic>eSK$EPm<9^rl+6^2^h9NSFRQDs;?6f?1%
+z2tC<;IX;w;W2jE)nt=@%R$_7T?LEU8vJ9Q!Y4FHdr6;=-twkz{86_giC@ps~hDNL`
+z@s!aFK_*j~IqC18Dy`fzhBq6FxWQoY?B7l{_o=kLiRqUY7}}?WKeyJ{0P74NUTZ5e
+zlgwnyBa<GfMEGj?ku~E)rr8r7Hby7fiFaK3Bu;nEyp@{w26`qE74!a7SP{{`dRsh}
+ziFA^?smk)O|I7~2!KD`3xXiF#(kuVN_E2fLcbtx;eI=-9uaSvFvM;Ri`{J<biy{?<
+zx$vY~;7qO{!`jB?Vv7TChVI`RMEzl?Po&$MPe6mbz8?aw{V$&cZ<0UyEq^$o;fmx7
+z<%@0R^*r$EpbMHan$iFjte{3-1@*!PXw3IvVVi|*74~dl&&_R(NNudrdY-a&h#HU$
+zKcjQdS^J2KU+1hVwE9TUYgcJ)&HWJ9aGiDxH*oV0f{)7yw@L_GrG)MhgomYs-V%hJ
+YQo`*e2#-q%ca|XRmJ;q#?<%<W6Mz@(-2eap
+
+diff --git a/bin/CourseStats.class b/bin/CourseStats.class
+index d2b3221b8390735955a8f570f4cc4953be73062e..d685219617365e0b0be6464f9298cb66d5494f4b 100644
+GIT binary patch
+delta 137
+zcmaDPv{GopTt;T5a}y^oW(=@pIyZ@f!H|)G>D*)v24fICg@eHqL{H^lFlS_7Ik))S
+z5)KASkjOL+25S&KorA#^M9-M)!SqOy@7$bo8_(@HxBc9na~rJ`xEOpHf_NDC7=kA|
+jvWQPkWA+pfIydEf>-pw$yUy)DxBJ}sbDJ+RPh<rET>>yi
+
+delta 177
+zcmZ1}^hjvKTt+t5!+nn$W=vkd7!V3(&g5V)WMlv{=Ws9>Lz#0q7)+teMH~#~j0_xy
+z`wlGz;w2mmmQabw91PY_<`fPFTSf+!!+odcOx9(3Bq4RU@91Qp>Wx6W1BkZ+@g5+a
+pEX|y&qylom+{68k8kQaIKQ;*{ybFl;1MzMkUJt~ZXE0A>1po=aQK0|;
+
+diff --git a/bin/Main$1.class b/bin/Main$1.class
+index f18d2941f044c46be1cf22237eb0b3e4ac027aa2..c0b15df7f4a65e65eb36c6a9d5cffae0e4f9d5a9 100644
+GIT binary patch
+delta 35
+qcmaFF`iOOdA`_#|WF@8uL45`e1_K5G215oB1|tRu29wF%OyK~F4F;e9
+
+delta 35
+qcmaFF`iOOdA`_$0WF@8uK~n|}1~Uc$26F}x1`7rW2CK>4OyK~HH3q~0
+
+diff --git a/bin/Main.class b/bin/Main.class
+index 3c28a739bff26657669b75a6f2b5de338624939f..ccf0f06644ad999ff938e9ea514f9f156facec48 100644
+GIT binary patch
+delta 707
+zcmYjOO-~b16g_X4c81qM%hZ;3D1~a(7TONbFBQZOEEeq-O2F={WEM3|Yv}N?!@odg
+z;YJfzx@JR(P5c3F{72}Wmyqx#bMBdW=bn4-dzUx<PVhgMzkUNKV*8YT2`ZRm&_1>g
+z+h(V4ZgjeqihyIWoa#qVg9jle&WuQy!Pm70gMM$2wU2EMKMZ$w+8MEAX@)_+Zn3-H
+zv8{cMC}v&J9K&R?dR?%R+EH=aF(e}tMMA?}gcv+WZkmew3{B^|RP)YFa1|-%o3z6g
+z2%E~X_>&PlC%7qiUhpNCmkPw)$~g^rc*%9I+aFk*=6#@`#1OdZW3y2{-m^a0oqkWl
+zL+7&`mRB^aI$!0}!kU6j25+t1=_QspDj4UeqOPEJWzasd&GMnuv$qbc14~1Ldj8<~
+zapHwc5AbdTe@oYgxK(x8f<84wq&7mdl^!Bi&*<@U+{x(o1SSQ}3rq{l3S4yY9LqnU
+z)+rV)@aPN-LF%PJ1C4=Gr8V3n)QJZWJV6LCOd)|V<`Kan3=&Rbl}_Y2W@wTaCC{RX
+zIJW87caegR((`mp)HEKG9muMVCwMAKt>YOniSn}KuuesrG~f%AiEWTJ1nD1jGp69B
+z0{?q@!4wo_j8joBStukj$-rH{5h|@AUR~hz8GTA(04_Gu#EYUAS1Msk;2XT9$jPQc
+Gk=B38)p&*g
+
+delta 857
+zcmZuv-BQy)6#lj?B!nPP1ZuS<Kr26mR(@4LL9tPxMYQ}?K@2rQw6snW6s~xNPA+@{
+zy#+5?MrM2fz0g<j1<<oQ>UiO9<~t{6&wl4`zcrklQ@)&i`V3$kxw7)^unx^=k>F=&
+zdTG2d5_zMroyZ*6j=8JiJX#sN#XX0iH6@O%Vq&pm6`YJyGL79y8SM;>j%hpEi(*OJ
+zww#^4Ed>{FQ9_WR<v({+TtbLJdd+F_tWf?D?C)S`79_*}&`9WHQ2#LKR^F7+U9OCD
+zYly0-K}bdqLw(+~?P9@>JNu3T4SoEm-;J<dHsGdNdn$%FHzg=U@823Y+hpI0j3KHl
+zeV`SLT~o7cZ7!Ki>bkBqC<<a2Q8CJMt$ACr9Ev{f9<gP1&E4=UN<-u$V}kS*HYF@0
+z!g5pSqe7qIdU)(N+iexIs3o>szG#~YlDI2DcfWfBp?lokC_0jHjNGfGl93}1hB+1U
+zZjG-TOiNf}s7)JIAu^<36?F=pU_-*Xd*lmvpJLPf>U)0}hL1L|^ASz{wh97VhDn}6
+z%lf;jh@`j{^Ixu_H+_m&cA$#Eg+c$73Wf*$V*;-Vye@E3;0=M(94ol>0rCRLJ14k*
+zOgToej!mk@3+0eP>-3<27RYEr69Nd*Ylza!;|NhV!<aw^W@u14I*~#b9-$j+h!9B>
+z&(MSC)c9>AP){tQG&m}T{L&<YSfKqtgq+19X&z#Y;~{Z)>8=m^87z^yOwMia{G_zJ
+z5>_N=^npo8`cQ{?)Dne6J_#b=tNs+L*($OpczjI19w>y0I2<N9C34}e9*V-zz?Se}
+IGzhVN0e2swcmMzZ
+
+diff --git a/bin/MyProfileGUI$1.class b/bin/MyProfileGUI$1.class
+index 7f2b95a304c96b8345f9e69686f544f7a4d1df7a..4d23d04fbf1459c1538e255d9f997fb7e168289d 100644
+GIT binary patch
+delta 310
+zcmY+8%Syvw5QV?LQLAb2($>~Z>Md$oFQFSZ0dXUuM5qM?ml1xY8d4}p#Z{L+fDhm!
+zNI_H-d;lLxoVIS9#W};woR4`Jf0{7Ae?Go|U3U8BvFc^1C}vOY8=dx5E7FH&M^4?T
+zo7gN_OtGvexWWImUp+TjWi5*%+ncZ(df{E-9dvb^oTfU}7VB&%a;>=AzSTjP=#HZ7
+z2E)@RjIX_B8pq*fr2WUHdhYq;<s%CvYEqymu9&AJnv=ePK}Nh-d%-eZDSu*L)ZSQp
+zXQeOm40EE>as_)#vM-Ea$SjR=e@r3ZQWdH}ZJ66+3o4AUzzo|m%1dDI#-Qwx{Q@Uh
+BGIjs}
+
+delta 159
+zcmbQw*3Qax>ff$?3=9lr49Xk1ycj26Wn5ct#UKO};bC9|l3WbJ3?e|9kwKI}3`lYV
+z*^UfMK*+$rskMcHhj|-=_(mXyi9rxZa)Bjm7&sX0z=nuH6haLFYGIINkOLaS%pece
+ZqrjjDq*)jw82A~K!1@^(*g^IJ0RWGu4e$T}
+
+diff --git a/bin/MyProfileGUI$2.class b/bin/MyProfileGUI$2.class
+index b41011e8530fcf6b145b932014bbbf10641f3180..affe6627f1d031034c7dc1b1af21ef3df4794e7a 100644
+GIT binary patch
+delta 27
+icmZ3$x`1_q025=tWI-l3&L9R3hF}IhhLFh#Ob!56MFp1t
+
+delta 27
+icmZ3$x`1_q028CrWI-l3P8S9a23H0?2DixxOb!53!3AFc
+
+diff --git a/bin/MyProfileGUI$3.class b/bin/MyProfileGUI$3.class
+index 5813eda275ec93a8f059753f21d7be01b520ba06..1a02b8ac2c56b9026fd600d0a082b00d990fff51 100644
+GIT binary patch
+delta 27
+icmZ3^x}0@`I1^*UWC<oW&L{>BhG+&phM39eOb!5AM+Mpd
+
+delta 27
+icmZ3^x}0@`I1{7SWC<oWP9Fvi244m~2EWPaOb!57!v&%M
+
+diff --git a/bin/MyProfileGUI$4.class b/bin/MyProfileGUI$4.class
+index a35765e5f3e41ba2756c9ef4e662aac4360d002c..50d47a4c2890ae429a87bb5b216e3c641ba1e57c 100644
+GIT binary patch
+delta 47
+zcmbQvHJxh%2Mc4uWKNb+*(3%IhExV2hI9r=hD-)!hHM6Hh8zYHhFk_)hWyF1S!w{|
+C<OzHL
+
+delta 47
+zcmbQvHJxh%2Mc4+WKNb+*$@T}hHwTUhDZiUhG+(5hFAt|hByWjhIj^BhQ!IUS!w{;
+CatQta
+
+diff --git a/bin/MyProfileGUI.class b/bin/MyProfileGUI.class
+index b9c45be95bbd8165d44dc5dc6176259f26a879d6..270fef5f3a7821ab640b5f73767dd0d1f2de06c3 100644
+GIT binary patch
+delta 300
+zcmW-b%_~G<6vlt=Bwd5BP)r#g8Fzt@M#(~1C<~=*EGSD#Nf@^#4Y_2BVH%S}7G`5{
+z7c<?(onglO0aNF$SxZ@2vh=bz=jojDe4J|MS4aL^Ek`6RFH(}KJa39Co_{1>&%6|*
+zD4vwX@ohgTl?D{!O|;Q!5LK9xm9l>#j#Q-duaKN?OF@?&|GGT+DRFZFvtB8;W>{)H
+zOdZ{{&`TG64AIXd5oQ@+5tCI0+0a{yVQfaYWRyF`cqB@m35uFsW{MgMys^ZmR{XH7
+z0_-S*UDZrXwX>%}SQ#hyJ{Kp*zWz5sh(p30YtK{dlVqARW=OH3ag8)vToEHnoNEra
+T(ac-Ub@m1K`tp!@ZT$EJ_9bMS
+
+delta 381
+zcmX|+y-R{o6vls7BFu_v2ud)FzMyX?qgsN7AfZLqf|g37hzLp&O6UuT-Z#>rAtY*P
+za8Ml5vIJjh=|5<c2$~ve?A*S%Jm;MIJm)<3-1mk;W9ma~do80BIkk-9y&xwj2yRy-
+zWCYii`FNtUdrD$jko{(jVqS96GE0$!4k@|aRiGHCqK;ZS9)(XkUx<*`9p_Rcb(bLb
+z?`riJ#Y-(GgiikzKl(4Lce=662R)ea+d9gXEfcnfRM15kP1NAVMKj&BFhVO6wBe_n
+zSvpywi;yV0^m0reXY_N$ASpa#879vtPmJ@7mp6QTGN)|JD?1CSnt-Y&sGKaurX4Sn
+z%Q#q(zpdhAP2SxQzfFb+Gsc#9M3|8rU`IOkS?55MsIZ6ZaU{pUlpW&4W6{djFLD-^
+AJ^%m!
+
+diff --git a/bin/RankGUI.class b/bin/RankGUI.class
+index 52a9e22bc73ad56211bdebfa0c7ada5cf4c917ca..89bc073e464049d559705312c1347ed08486767c 100644
+GIT binary patch
+delta 98
+rcmca1-zC4{GK-M#`~7=S(dO?g?u@p!sDfx}KwJgfDmHItQ{)5y>up5a
+
+delta 182
+zcmeB@zahWjGK-4p;q{01AKHtT-29Zqow2?WuNwR&KxGxkGlGkOkzvK=d^TxL0C-k=
+ALjV8(
+
+diff --git a/bin/ShowResultsGUI.class b/bin/ShowResultsGUI.class
+index 1a6fec7a00fe75c0357ba4839223f5cbb825e3e4..ddd510bbde9fc96817a6ed7027c1d4f063dc1076 100644
+GIT binary patch
+delta 163
+zcmZn_TrIGnn^8#k{r<hEX!3f-h<Z%ny+&*f91LK<!C=hDfJKEdn}YyMg*jFgCTtEO
+VFcsEVRhV)x*fKI~KF7436#%j|QTG4<
+
+delta 247
+zcmZ22&?>m0n^8se@cKjh5ADTEPM*scQBRD*y+&*f91LK<!C=hDK$IS1HU|Ni9&?;}
+Y98uk9!sZ|X(`1cP6N;YAxlH?50VEBL(f|Me
+
+diff --git a/bin/XlsReader.class b/bin/XlsReader.class
+index 5e4c42c8071975ae7944026a952c6e0db3127681..3a4e6b6eddba498d95bdbe829461032a910b6dcf 100644
+GIT binary patch
+delta 186
+zcmZqG|DwBL1uHk#xn1Y>pWAtE@A;m|ds+MIxz8;*x98kCAl|6J!7!7NLFC-Tb9>IW
+z0hR1HxAxq|^DXBa&+X@6n9az*ac<VRsppoSTfo6Emytmfn>wHo^BEcVfl}*%+V`Jt
+zJ>LvAcOgjqRG>+lfhIPeZ#lOP$liHwzk)0W!(v7TiF3<9wg4T~a&9M*{N{XiF#!NP
+C@@859
+
+delta 332
+zcmZ`#y9&ZU5WFiQDHV*ZHg*OZ|1W85a}XOv)FeKz@e$If7!F+GXISJ1Z2SOckJyM7
+z!`<%9%+B7+9rlk~%V|<@y8s$E139T89A%dB98@dd3hb*h?bu=>MUR5gADf;k{RkJ9
+zo`4;Y5}I>TPo1OEwwOxMprD9Zm7ui-B3sO)aQ_>5AbmMu_(F>IM{@v!XKKQ{4XJy`
+v5|HA`IQeAA_`wiNGTx_3$GJ5mODP7p!lg=0UGo>b2ye&czqHw-)~de&f;q@N
+
+diff --git a/lessons.txt b/lessons.txt
+deleted file mode 100644
+index 3c95cad..0000000
+--- a/lessons.txt
++++ /dev/null
+@@ -1,7 +0,0 @@
+-My name is JEEEFFF 
+-Διακριτα μαθηματικα 
+-Διακριτα μαθηματικα1 
+-Διακριτα μαθηματικα2 
+-Διακριτα μαθηματικα3 
+-Διακριτα μαθηματικα4 
+-Διακριτα μαθηματικα5 
+diff --git a/src/CheckBoxGUI.java b/src/CheckBoxGUI.java
+index 332d8f9..fa15fe9 100644
+--- a/src/CheckBoxGUI.java
++++ b/src/CheckBoxGUI.java
+@@ -2,6 +2,7 @@
+ 
+ import java.awt.Color;
+ import java.awt.Cursor;
++import java.awt.EventQueue;
+ import java.awt.Font;
+ import java.awt.event.ActionEvent;
+ import java.awt.event.ActionListener;
+@@ -64,7 +65,7 @@ public class CheckBoxGUI {
+ 		 
+ 		   HashSet<String> hashcourses = new HashSet<String>();
+ 		   ArrayList<String> arrcourses = new ArrayList();
+-		   
++		   ArrayList<JCheckBox> arcboxes = new ArrayList();
+ 		   
+ 							
+ 							
+@@ -81,6 +82,10 @@ public class CheckBoxGUI {
+ 					
+ 					JComboBox comboBoxS = new JComboBox();
+ 					comboBoxS.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
++					comboBoxS.setToolTipText("-Επιλέξτε Εξάμηνο-");
++					comboBoxS.setFont(new Font("Arial", Font.BOLD, 11));
++					comboBoxS.setModel(new DefaultComboBoxModel(new String[] {"Εξάμηνο 2ο", "Εξάμηνο 4ο", "Εξάμηνο 6ο ", "Εξάμηνο 8ο"}));
++					
+ 					
+ 					JComboBox comboBoxD = new JComboBox();
+ 					comboBoxD.setFont(new Font("Arial", Font.BOLD, 11));
+@@ -92,80 +97,100 @@ public class CheckBoxGUI {
+ 					
+ 	
+ 					
+-					comboBoxS.setToolTipText("-Επιλέξτε Εξάμηνο-");
+-					comboBoxS.setFont(new Font("Arial", Font.BOLD, 11));
+-					comboBoxS.setModel(new DefaultComboBoxModel(new String[] {"Εξάμηνο 2ο", "Εξάμηνο 4ο", "Εξάμηνο 6ο ", "Εξάμηνο 8ο"}));
+ 					
+ 					
+-					
+-					JCheckBox checkBox1 = new JCheckBox(re.getCoursesStats().get(0).getName());
+-					checkBox1.setVerticalAlignment(SwingConstants.TOP);
+-					checkBox1.setToolTipText("Mέρα, Ώρα, Αίθουσα");
+-					
+-					
+-					JCheckBox checkBox2 = new JCheckBox(re.getCoursesStats().get(1).getName());
+-					checkBox2.setVerticalAlignment(SwingConstants.TOP);
+-					
+-					JCheckBox checkBox3 = new JCheckBox(re.getCoursesStats().get(2).getName());
+-					checkBox3.setHorizontalAlignment(SwingConstants.LEFT);
+-					
+-					JCheckBox checkBox4 = new JCheckBox(re.getCoursesStats().get(3).getName());
+-					checkBox4.setVerticalAlignment(SwingConstants.TOP);
++						
++						JCheckBox checkBox1 = new JCheckBox(re.getCoursesStats().get(0).getName());
++						checkBox1.setVerticalAlignment(SwingConstants.TOP);
++						checkBox1.setToolTipText("Mέρα, Ώρα, Αίθουσα");
++						arcboxes.add(checkBox1);
++						
++						
++						JCheckBox checkBox2 = new JCheckBox(re.getCoursesStats().get(1).getName());
++						checkBox2.setVerticalAlignment(SwingConstants.TOP);
++						arcboxes.add(checkBox2);
++						
++						JCheckBox checkBox3 = new JCheckBox(re.getCoursesStats().get(2).getName());
++						checkBox3.setHorizontalAlignment(SwingConstants.LEFT);
++						arcboxes.add(checkBox3);
++						
++						JCheckBox checkBox4 = new JCheckBox(re.getCoursesStats().get(3).getName());
++						checkBox4.setVerticalAlignment(SwingConstants.TOP);
++						arcboxes.add(checkBox4);
+ 					
+ 
+ 						JCheckBox checkBox5 = new JCheckBox(re.getCoursesStats().get(4).getName());
+ 						checkBox5.setVerticalAlignment(SwingConstants.TOP);
++						arcboxes.add(checkBox5);
+ 						
+ 						JCheckBox checkBox6 = new JCheckBox(re.getCoursesStats().get(5).getName());
+-						checkBox6.show();
+ 						checkBox6.setVerticalAlignment(SwingConstants.TOP);
++						arcboxes.add(checkBox6);
+ 						
+-						JCheckBox checkBox7 = new JCheckBox(re.getCoursesStats().get(6).getName());
++						JCheckBox checkBox7 = new JCheckBox((String) null);
+ 						checkBox7.setVerticalAlignment(SwingConstants.TOP);
++						arcboxes.add(checkBox7);
+ 						
+-						
+-						JCheckBox checkBox8 = new JCheckBox(re.getCoursesStats().get(7).getName());
++						JCheckBox checkBox8 = new JCheckBox((String) null);
+ 						checkBox8.setVerticalAlignment(SwingConstants.TOP);
++						arcboxes.add(checkBox8);
+ 						
+ 						
+-						JCheckBox checkBox9 = new JCheckBox(re.getCoursesStats().get(8).getName());
++						JCheckBox checkBox9 = new JCheckBox((String) null);
+ 						checkBox9.setVerticalAlignment(SwingConstants.TOP);
++						arcboxes.add(checkBox9);
+ 						
+-						JCheckBox checkBox10 = new JCheckBox(re.getCoursesStats().get(9).getName());
++						JCheckBox checkBox10 = new JCheckBox((String) null);
+ 						checkBox10.setVerticalAlignment(SwingConstants.TOP);
++						arcboxes.add(checkBox10);
+ 						
+-						JCheckBox checkBox15 = new JCheckBox((String) null);
+-						checkBox15.setVerticalAlignment(SwingConstants.TOP);
+ 						
+-						JCheckBox checkBox14 = new JCheckBox((String) null);
+-						checkBox14.setVerticalAlignment(SwingConstants.TOP);
+-						
+-						JCheckBox checkBox13 = new JCheckBox((String) null);
+-						checkBox13.setVerticalAlignment(SwingConstants.TOP);
+ 						
+ 						JCheckBox checkBox11 = new JCheckBox((String) null);
+ 						checkBox11.setVerticalAlignment(SwingConstants.TOP);
++						arcboxes.add(checkBox11);
+ 						
+ 						JCheckBox checkBox12 = new JCheckBox((String) null);
+ 						checkBox12.setVerticalAlignment(SwingConstants.TOP);
++						arcboxes.add(checkBox12);
++						
++						JCheckBox checkBox13 = new JCheckBox((String) null);
++						checkBox13.setVerticalAlignment(SwingConstants.TOP);
++						arcboxes.add(checkBox13);
++						
++						JCheckBox checkBox14 = new JCheckBox((String) null);
++						checkBox14.setVerticalAlignment(SwingConstants.TOP);
++						arcboxes.add(checkBox14);
++						
++						JCheckBox checkBox15 = new JCheckBox((String) null);
++						checkBox15.setVerticalAlignment(SwingConstants.TOP);
++						arcboxes.add(checkBox15);
++						
+ 						
+ 						JCheckBox checkBox16 = new JCheckBox((String) null);
+ 						checkBox16.setVerticalAlignment(SwingConstants.TOP);
++						arcboxes.add(checkBox16);
+ 						
+ 						JCheckBox checkBox17 = new JCheckBox((String) null);
+ 						checkBox17.setVerticalAlignment(SwingConstants.TOP);
++						arcboxes.add(checkBox17);
+ 						
+ 						JCheckBox checkBox18 = new JCheckBox((String) null);
+ 						checkBox18.setVerticalAlignment(SwingConstants.TOP);
++						arcboxes.add(checkBox18);
+ 						
+ 						JCheckBox checkBox19 = new JCheckBox((String) null);
+ 						checkBox19.setVerticalAlignment(SwingConstants.TOP);
++						arcboxes.add(checkBox19);
+ 						
+ 						JCheckBox checkBox20 = new JCheckBox((String) null);
+ 						checkBox20.setVerticalAlignment(SwingConstants.TOP);
++						arcboxes.add(checkBox20);
+ 						
+ 						JCheckBox checkBox21 = new JCheckBox((String) null);
+ 						checkBox21.setVerticalAlignment(SwingConstants.TOP);
++						arcboxes.add(checkBox21);
++						
+ 						
+ 						GroupLayout gl_panel = new GroupLayout(panel);
+ 						gl_panel.setHorizontalGroup(
+@@ -364,23 +389,14 @@ public class CheckBoxGUI {
+ 						
+ 							
+ 							
+-							checkBox7.hide();
+-							checkBox8.hide();
+-							checkBox9.hide();
+-							checkBox10.hide();
+-							checkBox11.hide();
+-							checkBox12.hide();
+-							checkBox13.hide();
+-							checkBox14.hide();
+-							checkBox15.hide();
+-							checkBox16.hide();
+-							checkBox17.hide();
+-							checkBox18.hide();
+-							checkBox19.hide();
+-							checkBox20.hide();
+-							checkBox21.hide();
+-							
+-							
++						
++						for(int i=7; i<arcboxes.size();i++) {
++							arcboxes.get(i-1).hide();
++						}
++						
++							checkBox21.hide(); //bug 
++						
++
+ 									
+ 		
+ 		frmInitScreen.setBounds(100, 100, 697, 440);
+@@ -409,7 +425,7 @@ public class CheckBoxGUI {
+ 						
+ 			}
+ 			
+-	
++		
+ 			
+ 			public int Semester(int sem_index) {
+ 				int x=2;
+@@ -438,347 +454,31 @@ public class CheckBoxGUI {
+ 				
+ 			}
+ 			
++			//int efi=0;
++			
++			
+ 			public void Efarmosmeni(int S){
++				int cbi=0;
+ 				if(S==2) { //IDIA MATHIMATA EFARM KAI DIOIKHSH STO 2o EKSAMINO
+-					if(re.getCoursesStats().get(0).getSemesterN()==S) {  
+-						checkBox1.show();
+-						checkBox1.setSelected(false);
+-						checkBox1.setText(re.getCoursesStats().get(0).getName());
+-
+-						}
+-						if(re.getCoursesStats().get(1).getSemesterN()==S) {  
+-							checkBox2.show();
+-							checkBox2.setSelected(false);
+-							checkBox2.setText(re.getCoursesStats().get(1).getName());
+-							} 
+-						if(re.getCoursesStats().get(2).getSemesterN()==S) {  
+-							checkBox3.show();
+-							checkBox3.setSelected(false);
+-							checkBox3.setText(re.getCoursesStats().get(2).getName());
+-							}
+-						
+-						if(re.getCoursesStats().get(3).getSemesterN()==S) {  
+-							checkBox4.show();
+-							checkBox4.setSelected(false);
+-							checkBox4.setText(re.getCoursesStats().get(3).getName());
+-							}
+-						if(re.getCoursesStats().get(4).getSemesterN()==S) {  
+-							checkBox5.show();
+-							checkBox5.setSelected(false);
+-							checkBox5.setText(re.getCoursesStats().get(4).getName());
+-							}
+-						if(re.getCoursesStats().get(5).getSemesterN()==S) {  
+-							checkBox6.show();
+-							checkBox6.setSelected(false);
+-							checkBox6.setText(re.getCoursesStats().get(5).getName());
+-							}
+-						
+-						
+-						
+-						checkBox7.hide();
+-						checkBox7.setSelected(false);
+ 					
+-						checkBox8.hide();
+-						checkBox8.setSelected(false);
+-						
+-						checkBox9.hide();
+-						checkBox9.setSelected(false);
+-						
+-						checkBox10.hide();
+-						checkBox10.setSelected(false);
+-						
+-						checkBox11.hide();
+-						checkBox11.setSelected(false);
+-						
+-						checkBox12.hide();
+-						checkBox12.setSelected(false);
+-						
+-						checkBox13.hide();
+-						checkBox13.setSelected(false);
+-						
+-						checkBox14.hide();
+-						checkBox14.setSelected(false);
+-						
+-						checkBox15.hide();
+-						checkBox15.setSelected(false);
+-						
+-						checkBox16.hide();
+-						checkBox16.setSelected(false);
+-						
+-						checkBox17.hide();
+-						checkBox17.setSelected(false);
+-						
+-						checkBox18.hide();
+-						checkBox18.setSelected(false);
+-						
+-						checkBox19.hide();
+-						checkBox19.setSelected(false);
+-						
+-						checkBox20.hide();
+-						checkBox20.setSelected(false);
+-						
+-						checkBox21.hide();
+-						checkBox21.setSelected(false);
++					setCheckBoxes(0,5);
+ 				}
+-				else if(S==4) { //ep
+-					if(re.getCoursesStats().get(6).getSemesterN()==S) {  
+-						checkBox1.setSelected(false);
+-						checkBox1.setText(re.getCoursesStats().get(6).getName());
+-						}
+-						if(re.getCoursesStats().get(7).getSemesterN()==S) {  
+-							checkBox2.setText(re.getCoursesStats().get(7).getName());
+-							checkBox2.setSelected(false);
+-							} 
+-						
+-						if(re.getCoursesStats().get(8).getSemesterN()==S) {  
+-							checkBox3.setSelected(false);
+-							checkBox3.setText(re.getCoursesStats().get(8).getName());
+-							}
+-						
+-						if(re.getCoursesStats().get(9).getSemesterN()==S) {  
+-							checkBox4.setSelected(false);
+-							checkBox4.setText(re.getCoursesStats().get(9).getName());
+-							}
+-						if(re.getCoursesStats().get(10).getSemesterN()==S) {  
+-							checkBox5.setSelected(false);
+-							checkBox5.setText(re.getCoursesStats().get(10).getName());
+-							}
+-						if(re.getCoursesStats().get(11).getSemesterN()==S) {  
+-							checkBox6.show();
+-							checkBox6.setSelected(false);
+-							checkBox6.setText(re.getCoursesStats().get(11).getName());
+-							}
+-						
+-						
+-						checkBox7.hide();
+-						checkBox7.setSelected(false);
++				
++				else if(S==4) { 
++					
++					setCheckBoxes(6,11);
+ 					
+-						checkBox8.hide();
+-						checkBox8.setSelected(false);
+-						
+-						checkBox9.hide();
+-						checkBox9.setSelected(false);
+-						
+-						checkBox10.hide();
+-						checkBox10.setSelected(false);
+-						
+-						checkBox11.hide();
+-						checkBox11.setSelected(false);
+-						
+-						checkBox12.hide();
+-						checkBox12.setSelected(false);
+-						
+-						checkBox13.hide();
+-						checkBox13.setSelected(false);
+-						
+-						checkBox14.hide();
+-						checkBox14.setSelected(false);
+-						
+-						checkBox15.hide();
+-						checkBox15.setSelected(false);
+-						
+-						checkBox16.hide();
+-						checkBox16.setSelected(false);
+-						
+-						checkBox17.hide();
+-						checkBox17.setSelected(false);
+-						
+-						checkBox18.hide();
+-						checkBox18.setSelected(false);
+-						
+-						checkBox19.hide();
+-						checkBox19.setSelected(false);
+-						
+-						checkBox20.hide();
+-						checkBox20.setSelected(false);
+-						
+-						checkBox21.hide();
+-						checkBox21.setSelected(false);
+ 				}
+-				else if(S==6) { //ep
+-					if(re.getCoursesStats().get(12).getSemesterN()==S) {  
+-						checkBox1.setSelected(false);
+-						checkBox1.setText(re.getCoursesStats().get(12).getName());
+-						}
+-						if(re.getCoursesStats().get(13).getSemesterN()==S) {
+-							checkBox2.setSelected(false);
+-							checkBox2.setText(re.getCoursesStats().get(13).getName());
+-							} 
+-						if(re.getCoursesStats().get(14).getSemesterN()==S) {  
+-							checkBox3.setSelected(false);
+-							checkBox3.setText(re.getCoursesStats().get(14).getName());
+-							}
+-						
+-						if(re.getCoursesStats().get(15).getSemesterN()==S) {  
+-							checkBox4.setSelected(false);
+-							checkBox4.setText(re.getCoursesStats().get(15).getName());
+-							}
+-						if(re.getCoursesStats().get(16).getSemesterN()==S) {
+-							checkBox5.setSelected(false); 
+-							checkBox5.setText(re.getCoursesStats().get(16).getName());
+-							}
+-						
+-						
+-						
+-						checkBox6.hide();
+-						checkBox6.setSelected(false);
+-						
+-						checkBox7.hide();
+-						checkBox7.setSelected(false);
++				
++				else if(S==6) { 
+ 					
+-						checkBox8.hide();
+-						checkBox8.setSelected(false);
+-						
+-						checkBox9.hide();
+-						checkBox9.setSelected(false);
+-						
+-						checkBox10.hide();
+-						checkBox10.setSelected(false);
+-						
+-						checkBox11.hide();
+-						checkBox11.setSelected(false);
+-						
+-						checkBox12.hide();
+-						checkBox12.setSelected(false);
+-						
+-						checkBox13.hide();
+-						checkBox13.setSelected(false);
+-						
+-						checkBox14.hide();
+-						checkBox14.setSelected(false);
+-						
+-						checkBox15.hide();
+-						checkBox15.setSelected(false);
+-						
+-						checkBox16.hide();
+-						checkBox16.setSelected(false);
+-						
+-						checkBox17.hide();
+-						checkBox17.setSelected(false);
+-						
+-						checkBox18.hide();
+-						checkBox18.setSelected(false);
+-						
+-						checkBox19.hide();
+-						checkBox19.setSelected(false);
+-						
+-						checkBox20.hide();
+-						checkBox20.setSelected(false);
+-						
+-						checkBox21.hide();
+-						checkBox21.setSelected(false);
++					setCheckBoxes(12,16);
++	
+ 				}
+ 				else if(S==8) { //ep
+-					if(re.getCoursesStats().get(17).getSemesterN()==S) {  
+-						checkBox1.setSelected(false);
+-						checkBox1.setText(re.getCoursesStats().get(17).getName());
+-						}
+-						if(re.getCoursesStats().get(18).getSemesterN()==S) { 
+-							checkBox2.setSelected(false);
+-							checkBox2.setText(re.getCoursesStats().get(18).getName());
+-							} 
+-						if(re.getCoursesStats().get(19).getSemesterN()==S) {
+-							checkBox3.setSelected(false);
+-							checkBox3.setText(re.getCoursesStats().get(19).getName());
+-							}
+-						
+-						if(re.getCoursesStats().get(20).getSemesterN()==S) {
+-							checkBox4.setSelected(false);
+-							checkBox4.setText(re.getCoursesStats().get(20).getName());
+-							}
+-						if(re.getCoursesStats().get(21).getSemesterN()==S) {  
+-							checkBox5.show();
+-							checkBox5.setSelected(false);
+-							checkBox5.setText(re.getCoursesStats().get(21).getName());
+-							}
+-						if(re.getCoursesStats().get(22).getSemesterN()==S) {
+-							checkBox6.show();
+-							checkBox6.setSelected(false);
+-							checkBox6.setText(re.getCoursesStats().get(22).getName());
+-						}
+-						if(re.getCoursesStats().get(23).getSemesterN()==S) {  
+-							checkBox7.show();
+-							checkBox7.setSelected(false);
+-							checkBox7.setText(re.getCoursesStats().get(23).getName());
+-							}
+-							if(re.getCoursesStats().get(24).getSemesterN()==S) {  
+-								checkBox8.show();
+-								checkBox8.setSelected(false);
+-								checkBox8.setText(re.getCoursesStats().get(24).getName());
+-								} 
+-							if(re.getCoursesStats().get(25).getSemesterN()==S) {  
+-								checkBox9.show();
+-								checkBox9.setSelected(false);
+-								checkBox9.setText(re.getCoursesStats().get(25).getName());
+-								}
+-							
+-							if(re.getCoursesStats().get(26).getSemesterN()==S) {  
+-								checkBox10.show();
+-								checkBox10.setSelected(false);
+-								checkBox10.setText(re.getCoursesStats().get(26).getName());
+-								}
+-							if(re.getCoursesStats().get(27).getSemesterN()==S) {  
+-								checkBox11.show();
+-								checkBox11.setSelected(false);
+-								checkBox11.setText(re.getCoursesStats().get(27).getName());
+-								}
+-							if(re.getCoursesStats().get(28).getSemesterN()==S) {  
+-								checkBox12.show();
+-								checkBox12.setSelected(false);
+-								checkBox12.setText(re.getCoursesStats().get(28).getName());
+-								}
+-								if(re.getCoursesStats().get(29).getSemesterN()==S) {  
+-									checkBox13.show();
+-									checkBox13.setSelected(false);
+-									checkBox13.setText(re.getCoursesStats().get(29).getName());
+-									} 
+-								if(re.getCoursesStats().get(30).getSemesterN()==S) {  
+-									checkBox14.show();
+-									checkBox14.setSelected(false);
+-									checkBox14.setText(re.getCoursesStats().get(30).getName());
+-									}
+-								
+-								if(re.getCoursesStats().get(31).getSemesterN()==S) {  
+-									checkBox15.show();
+-									checkBox15.setSelected(false);
+-									checkBox15.setText(re.getCoursesStats().get(31).getName());
+-									}
+-								if(re.getCoursesStats().get(32).getSemesterN()==S) {  
+-									checkBox16.show();
+-									checkBox16.setSelected(false);
+-									checkBox16.setText(re.getCoursesStats().get(32).getName());
+-									}
+-								if(re.getCoursesStats().get(33).getSemesterN()==S) {  
+-									checkBox16.show();
+-									checkBox16.setText(re.getCoursesStats().get(33).getName());
+-									}
+-									if(re.getCoursesStats().get(34).getSemesterN()==S) {  
+-										checkBox17.show();
+-										checkBox17.setSelected(false);
+-										checkBox17.setText(re.getCoursesStats().get(34).getName());
+-										} 
+-									if(re.getCoursesStats().get(35).getSemesterN()==S) {  
+-										checkBox18.show();
+-										checkBox18.setSelected(false);
+-										checkBox18.setText(re.getCoursesStats().get(35).getName());
+-										}
+-									
+-									if(re.getCoursesStats().get(36).getSemesterN()==S) {  
+-										checkBox19.show();
+-										checkBox19.setSelected(false);
+-										checkBox19.setText(re.getCoursesStats().get(36).getName());
+-										}
+-									if(re.getCoursesStats().get(37).getSemesterN()==S) {  
+-										checkBox20.show();
+-										checkBox20.setSelected(false);
+-										checkBox20.setText(re.getCoursesStats().get(37).getName());
+-										}
+-									if(re.getCoursesStats().get(38).getSemesterN()==S) {  
+-										checkBox21.show();
+-										checkBox21.setSelected(false);
+-										checkBox21.setText(re.getCoursesStats().get(38).getName());
+-										}
+-									
++				
++					setCheckBoxes(17,38);
++					
+ 				}
+ 				
+ 				
+@@ -789,310 +489,47 @@ public class CheckBoxGUI {
+ 				
+ 					if(S==2) { //STO 2o EKSAMINO TA MATHIMATA EINAI IDIA ALLA THA EINAI TA IDIA KAI STIS DYO KATEYTHINSEIS 
+ 						
+-						if(re.getCoursesStats().get(0).getSemesterN()==S) {  
+-							checkBox1.setSelected(false);
+-							checkBox1.setText(re.getCoursesStats().get(0).getName());
+-							
+-							}
+-							if(re.getCoursesStats().get(1).getSemesterN()==S) {
+-								checkBox2.setSelected(false);
+-								checkBox2.setText(re.getCoursesStats().get(1).getName());
+-								} 
+-							if(re.getCoursesStats().get(2).getSemesterN()==S) {
+-								checkBox3.setSelected(false);
+-								checkBox3.setText(re.getCoursesStats().get(2).getName());
+-								}
+-							
+-							if(re.getCoursesStats().get(3).getSemesterN()==S) {  
+-								checkBox4.setSelected(false);
+-								checkBox4.setText(re.getCoursesStats().get(3).getName());
+-								}
+-							if(re.getCoursesStats().get(4).getSemesterN()==S) {
+-								checkBox5.setSelected(false);
+-								checkBox5.setText(re.getCoursesStats().get(4).getName());
+-								}
+-							if(re.getCoursesStats().get(5).getSemesterN()==S) {
+-								checkBox6.setSelected(false);
+-								checkBox6.setText(re.getCoursesStats().get(5).getName());
+-								}
+-							checkBox7.hide();
+-							checkBox7.setSelected(false);
+-						
+-							checkBox8.hide();
+-							checkBox8.setSelected(false);
+-							
+-							checkBox9.hide();
+-							checkBox9.setSelected(false);
+-							
+-							checkBox10.hide();
+-							checkBox10.setSelected(false);
+-							
+-							checkBox11.hide();
+-							checkBox11.setSelected(false);
+-							
+-							checkBox12.hide();
+-							checkBox12.setSelected(false);
+-							
+-							checkBox13.hide();
+-							checkBox13.setSelected(false);
+-							
+-							checkBox14.hide();
+-							checkBox14.setSelected(false);
+-							
+-							checkBox15.hide();
+-							checkBox15.setSelected(false);
+-							
+-							checkBox16.hide();
+-							checkBox16.setSelected(false);
+-							
+-							checkBox17.hide();
+-							checkBox17.setSelected(false);
+-							
+-							checkBox18.hide();
+-							checkBox18.setSelected(false);
+-							
+-							checkBox19.hide();
+-							checkBox19.setSelected(false);
+-							
+-							checkBox20.hide();
+-							checkBox20.setSelected(false);
+-							
+-							checkBox21.hide();
+-							checkBox21.setSelected(false);
++						setCheckBoxes(0,5);
+ 					}
+ 					else if(S==4) {
+ 						
+-						if(re.getCoursesStats().get(39).getSemesterN()==S) {  
+-							checkBox1.setSelected(false);
+-							checkBox1.setText(re.getCoursesStats().get(39).getName());
+-							}
+-							if(re.getCoursesStats().get(40).getSemesterN()==S) {  
+-								checkBox2.setSelected(false);
+-								checkBox2.setText(re.getCoursesStats().get(40).getName());
+-								} 
+-							if(re.getCoursesStats().get(41).getSemesterN()==S) {  
+-								checkBox3.setSelected(false);
+-								checkBox3.setText(re.getCoursesStats().get(41).getName());
+-								}
+-							
+-							if(re.getCoursesStats().get(42).getSemesterN()==S) {  
+-								checkBox4.setSelected(false);
+-								checkBox4.setText(re.getCoursesStats().get(42).getName());
+-								}
+-							if(re.getCoursesStats().get(43).getSemesterN()==S) {  
+-								checkBox5.setSelected(false);
+-								checkBox5.setText(re.getCoursesStats().get(43).getName());
+-								}
+-							
+-							checkBox6.hide();
+-							checkBox6.setSelected(false);
+-							
+-							checkBox7.hide();
+-							checkBox7.setSelected(false);
+-						
+-							checkBox8.hide();
+-							checkBox8.setSelected(false);
+-							
+-							checkBox9.hide();
+-							checkBox9.setSelected(false);
+-							
+-							checkBox10.hide();
+-							checkBox10.setSelected(false);
+-							
+-							checkBox11.hide();
+-							checkBox11.setSelected(false);
+-							
+-							checkBox12.hide();
+-							checkBox12.setSelected(false);
+-							
+-							checkBox13.hide();
+-							checkBox13.setSelected(false);
+-							
+-							checkBox14.hide();
+-							checkBox14.setSelected(false);
+-							
+-							checkBox15.hide();
+-							checkBox15.setSelected(false);
+-							
+-							checkBox16.hide();
+-							checkBox16.setSelected(false);
+-							
+-							checkBox17.hide();
+-							checkBox17.setSelected(false);
+-							
+-							checkBox18.hide();
+-							checkBox18.setSelected(false);
+-							
+-							checkBox19.hide();
+-							checkBox19.setSelected(false);
+-							
+-							checkBox20.hide();
+-							checkBox20.setSelected(false);
+-							
+-							checkBox21.hide();
+-							checkBox21.setSelected(false);
++						setCheckBoxes(39,43);
+ 					}
+ 					else if(S==6) {
+-						if(re.getCoursesStats().get(44).getSemesterN()==S) {  
+-							checkBox1.setSelected(false);
+-							checkBox1.setText(re.getCoursesStats().get(44).getName());
+-							}
+-							if(re.getCoursesStats().get(45).getSemesterN()==S) {
+-								checkBox2.setSelected(false);
+-								checkBox2.setText(re.getCoursesStats().get(45).getName());
+-								} 
+-							if(re.getCoursesStats().get(46).getSemesterN()==S) {
+-								checkBox3.setSelected(false);
+-								checkBox3.setText(re.getCoursesStats().get(46).getName());
+-								}
+-							
+-							if(re.getCoursesStats().get(47).getSemesterN()==S) {
+-								checkBox4.setSelected(false);
+-								checkBox4.setText(re.getCoursesStats().get(47).getName());
+-								}
+-							if(re.getCoursesStats().get(48).getSemesterN()==S) {
+-								checkBox5.setSelected(false);
+-								checkBox5.setText(re.getCoursesStats().get(48).getName());
+-								}
+-							if(re.getCoursesStats().get(49).getSemesterN()==S) {  
+-								checkBox6.show();
+-								checkBox6.setSelected(false);
+-								checkBox6.setText(re.getCoursesStats().get(49).getName());
+-								}
+-						    
+-							checkBox7.hide();
+-							checkBox7.setSelected(false);
+-						
+-							checkBox8.hide();
+-							checkBox8.setSelected(false);
+-							
+-							checkBox9.hide();
+-							checkBox9.setSelected(false);
+-							
+-							checkBox10.hide();
+-							checkBox10.setSelected(false);
+-							
+-							checkBox11.hide();
+-							checkBox11.setSelected(false);
+-							
+-							checkBox12.hide();
+-							checkBox12.setSelected(false);
+-							
+-							checkBox13.hide();
+-							checkBox13.setSelected(false);
+-							
+-							checkBox14.hide();
+-							checkBox14.setSelected(false);
+-							
+-							checkBox15.hide();
+-							checkBox15.setSelected(false);
+-							
+-							checkBox16.hide();
+-							checkBox16.setSelected(false);
+-							
+-							checkBox17.hide();
+-							checkBox17.setSelected(false);
+-							
+-							checkBox18.hide();
+-							checkBox18.setSelected(false);
+-							
+-							checkBox19.hide();
+-							checkBox19.setSelected(false);
+-							
+-							checkBox20.hide();
+-							checkBox20.setSelected(false);
+-							
+-							checkBox21.hide();
+-							checkBox21.setSelected(false);
+-						
++						setCheckBoxes(44,49);
+ 					}
+ 					else if(S==8) {
+ 
+-						if(re.getCoursesStats().get(50).getSemesterN()==S) {  
+-							checkBox1.setSelected(false);
+-							checkBox1.setText(re.getCoursesStats().get(50).getName());
+-							}
+-							if(re.getCoursesStats().get(51).getSemesterN()==S) {  
+-								checkBox2.setSelected(false);
+-								checkBox2.setText(re.getCoursesStats().get(51).getName());
+-								} 
+-							if(re.getCoursesStats().get(52).getSemesterN()==S) {
+-								checkBox3.setSelected(false);
+-								checkBox3.setText(re.getCoursesStats().get(52).getName());
+-								}
+-							
+-							if(re.getCoursesStats().get(53).getSemesterN()==S) {
+-								checkBox4.setSelected(false);
+-								checkBox4.setText(re.getCoursesStats().get(53).getName());
+-								}
+-							
+-							checkBox5.hide();
+-							checkBox5.setSelected(false);
+-							
+-							checkBox6.hide();
+-							checkBox6.setSelected(false);
+-							
+-							checkBox7.hide();
+-							checkBox7.setSelected(false);
+-						
+-							checkBox8.hide();
+-							checkBox8.setSelected(false);
+-							
+-							checkBox9.hide();
+-							checkBox9.setSelected(false);
+-							
+-							checkBox10.hide();
+-							checkBox10.setSelected(false);
+-							
+-							checkBox11.hide();
+-							checkBox11.setSelected(false);
+-							
+-							checkBox12.hide();
+-							checkBox12.setSelected(false);
+-							
+-							checkBox13.hide();
+-							checkBox13.setSelected(false);
+-							
+-							checkBox14.hide();
+-							checkBox14.setSelected(false);
+-							
+-							checkBox15.hide();
+-							checkBox15.setSelected(false);
+-							
+-							checkBox16.hide();
+-							checkBox16.setSelected(false);
+-							
+-							checkBox17.hide();
+-							checkBox17.setSelected(false);
+-							
+-							checkBox18.hide();
+-							checkBox18.setSelected(false);
+-							
+-							checkBox19.hide();
+-							checkBox19.setSelected(false);
+-							
+-							checkBox20.hide();
+-							checkBox20.setSelected(false);
+-							
+-							checkBox21.hide();
+-							checkBox21.setSelected(false);
++						setCheckBoxes(50,53);
+ 					}
+ 				
+ 			}
+ 			
+-			
++			public void setCheckBoxes(int start, int end) { //!lag
++				int checkboxcounter=0;
++				for(int cindex = start; cindex<=end;cindex++) {
++					arcboxes.get(checkboxcounter).show();
++					arcboxes.get(checkboxcounter).setSelected(false);
++					arcboxes.get(checkboxcounter).setText(re.getCoursesStats().get(cindex).getName());
++					checkboxcounter++;
++				}
++				
++				for(int i=checkboxcounter; i<arcboxes.size();i++) {
++					arcboxes.get(i).hide();
++					arcboxes.get(i).setSelected(false);
++				}
++			}
+ 
+ 			
+ 		}//itemlistener
+ 	
+ 
+ 	
++	
++	
+ 	class ActionHandler implements ActionListener{
+ 		
+-		
+-		
+-		
+-		
++	
+ 		
+ 		@Override
+ 		public void actionPerformed(ActionEvent ae) {
+@@ -1100,20 +537,22 @@ public class CheckBoxGUI {
+ 			if(ae.getSource()==nextframebutton) {
+ 				
+ 				if (arrcourses.size()>0 && arrcourses.size()<=10) {
+-					new MyProfileGUI();
+-					
++					//new MyProfileGUI();
++					EventQueue.invokeLater(new Runnable() {
++						public void run() {
++							try {
++								MainFrame window = new MainFrame();
++								window.frmMainframe.setVisible(true);
++							} catch (Exception e) {
++								e.printStackTrace();
++							}
++						}
++					});
+ 					frmInitScreen.setVisible(false);
++					
++					
+ 				
+-				
+-				/*
+-				 * 
+-				 * 
+-				 *   KLHSH EPOMENOU PARATHIROU
+-				 *   UKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+-				 * 
+-				 * 
+-				 * 
+-				 */
++			
+ 				}
+ 				
+ 				else {
+@@ -1168,7 +607,7 @@ public class CheckBoxGUI {
+ 			}
+ 			
+ 			if(checkBox5.isSelected()) {
+-				infotext.setText("tsekares to trito koutaki");
++				infotext.setText("tsekares to 5 koutaki");
+ 			     
+ 				if(ae.getSource()==addbutton) {
+ 					hashcourses.add(checkBox5.getText());
+@@ -1177,7 +616,7 @@ public class CheckBoxGUI {
+ 			}
+ 			
+ 			if(checkBox6.isSelected()) {
+-				infotext.setText("tsekares to trito koutaki");
++				infotext.setText("tsekares to 6 koutaki");
+ 			     
+ 				if(ae.getSource()==addbutton) {
+ 					hashcourses.add(checkBox6.getText());
+@@ -1186,7 +625,7 @@ public class CheckBoxGUI {
+ 			}
+ 			
+ 			if(checkBox7.isSelected()) {
+-				infotext.setText("tsekares to trito koutaki");
++				infotext.setText("tsekares to 7 koutaki");
+ 			     
+ 				if(ae.getSource()==addbutton) {
+ 					hashcourses.add(checkBox7.getText());
+@@ -1195,7 +634,7 @@ public class CheckBoxGUI {
+ 			}
+ 			
+ 			if(checkBox8.isSelected()) {
+-				infotext.setText("tsekares to trito koutaki");
++				infotext.setText("tsekares to 8 koutaki");
+ 			     
+ 				if(ae.getSource()==addbutton) {
+ 					hashcourses.add(checkBox8.getText());
+@@ -1204,7 +643,7 @@ public class CheckBoxGUI {
+ 			}
+ 			
+ 			if(checkBox9.isSelected()) {
+-				infotext.setText("tsekares to trito koutaki");
++				infotext.setText("tsekares to 9 koutaki");
+ 			     
+ 				if(ae.getSource()==addbutton) {
+ 					hashcourses.add(checkBox9.getText());
+@@ -1213,7 +652,7 @@ public class CheckBoxGUI {
+ 			}
+ 		
+ 			if(checkBox10.isSelected()) {
+-				infotext.setText("tsekares to trito koutaki");
++				infotext.setText("tsekares to 10 koutaki");
+ 			     
+ 				if(ae.getSource()==addbutton) {
+ 					hashcourses.add(checkBox10.getText());
+@@ -1222,7 +661,7 @@ public class CheckBoxGUI {
+ 			}
+ 			
+ 			if(checkBox11.isSelected()) {
+-				infotext.setText("tsekares to trito koutaki");
++				infotext.setText("tsekares to 11 koutaki");
+ 			     
+ 				if(ae.getSource()==addbutton) {
+ 					hashcourses.add(checkBox11.getText());
+@@ -1231,7 +670,7 @@ public class CheckBoxGUI {
+ 			}
+ 			
+ 			if(checkBox12.isSelected()) {
+-				infotext.setText("tsekares to trito koutaki");
++				infotext.setText("tsekares to 12 koutaki");
+ 			     
+ 				if(ae.getSource()==addbutton) {
+ 					hashcourses.add(checkBox12.getText());
+@@ -1240,7 +679,7 @@ public class CheckBoxGUI {
+ 			}
+ 			
+ 			if(checkBox13.isSelected()) {
+-				infotext.setText("tsekares to trito koutaki");
++				infotext.setText("tsekares to 13 koutaki");
+ 			     
+ 				if(ae.getSource()==addbutton) {
+ 					hashcourses.add(checkBox13.getText());
+@@ -1249,7 +688,7 @@ public class CheckBoxGUI {
+ 			}
+ 			
+ 			if(checkBox14.isSelected()) {
+-				infotext.setText("tsekares to trito koutaki");
++				infotext.setText("tsekares to 14 koutaki");
+ 			     
+ 				if(ae.getSource()==addbutton) {
+ 					hashcourses.add(checkBox14.getText());
+@@ -1258,7 +697,7 @@ public class CheckBoxGUI {
+ 			}
+ 			
+ 			if(checkBox15.isSelected()) {
+-				infotext.setText("tsekares to trito koutaki");
++				infotext.setText("tsekares to 15 koutaki");
+ 			     
+ 				if(ae.getSource()==addbutton) {
+ 					hashcourses.add(checkBox15.getText());
+@@ -1267,7 +706,7 @@ public class CheckBoxGUI {
+ 			}
+ 			
+ 			if(checkBox16.isSelected()) {
+-				infotext.setText("tsekares to trito koutaki");
++				infotext.setText("tsekares to 16 koutaki");
+ 			     
+ 				if(ae.getSource()==addbutton) {
+ 					hashcourses.add(checkBox16.getText());
+@@ -1276,7 +715,7 @@ public class CheckBoxGUI {
+ 			}
+ 			
+ 			if(checkBox17.isSelected()) {
+-				infotext.setText("tsekares to trito koutaki");
++				infotext.setText("tsekares to 17 koutaki");
+ 			     
+ 				if(ae.getSource()==addbutton) {
+ 					hashcourses.add(checkBox17.getText());
+@@ -1285,7 +724,7 @@ public class CheckBoxGUI {
+ 			}
+ 			
+ 			if(checkBox18.isSelected()) {
+-				infotext.setText("tsekares to trito koutaki");
++				infotext.setText("tsekares to 18 koutaki");
+ 			     
+ 				if(ae.getSource()==addbutton) {
+ 					hashcourses.add(checkBox18.getText());
+@@ -1294,7 +733,7 @@ public class CheckBoxGUI {
+ 			}
+ 			
+ 			if(checkBox19.isSelected()) {
+-				infotext.setText("tsekares to trito koutaki");
++				infotext.setText("tsekares to 19 koutaki");
+ 			     
+ 				if(ae.getSource()==addbutton) {
+ 					hashcourses.add(checkBox19.getText());
+@@ -1303,7 +742,7 @@ public class CheckBoxGUI {
+ 			}
+ 			
+ 			if(checkBox20.isSelected()) {
+-				infotext.setText("tsekares to trito koutaki");
++				infotext.setText("tsekares to 20 koutaki");
+ 			     
+ 				if(ae.getSource()==addbutton) {
+ 					hashcourses.add(checkBox20.getText());
+@@ -1312,7 +751,7 @@ public class CheckBoxGUI {
+ 			}
+ 			
+ 			if(checkBox21.isSelected()) {
+-				infotext.setText("tsekares to trito koutaki");
++				infotext.setText("tsekares to 21 koutaki");
+ 			     
+ 				if(ae.getSource()==addbutton) {
+ 					hashcourses.add(checkBox21.getText());
+@@ -1353,7 +792,7 @@ public class CheckBoxGUI {
+ 
+ 		   
+ 		    
+-		  // System.out.println(arrcourses);
++		 
+ 		   textcourses.setText(toString2(arrcourses));  
+ 		}
+ 		
+diff --git a/src/Main.java b/src/Main.java
+index cdf5819..a2d2ca6 100644
+--- a/src/Main.java
++++ b/src/Main.java
+@@ -14,12 +14,15 @@ public class Main {
+ 		//re.printCoursesStats();
+ 		//re.printCourses();
+ 		
++<<<<<<< HEAD
++=======
+ 		//test for github
+ 		
+ 	    System.out.println("test for github");
+ 	    
+ 	    //test 2 for github
+ 	    System.out.println("test 2 for github");
++>>>>>>> parent of 8d22573... commit test 2 (2)
+ 		
+ 		File myDir = new File("C:\\Users\\GEORGE MICHOS\\eclipse-workspace\\MyUom");
+ 		File lessons = new File(myDir, "lessons.txt");
+diff --git a/src/MainFrame.java b/src/MainFrame.java
+new file mode 100644
+index 0000000..7bdedb9
+--- /dev/null
++++ b/src/MainFrame.java
+@@ -0,0 +1,164 @@
++import java.awt.EventQueue;
++import java.awt.Font;
++import java.awt.SystemColor;
++import java.awt.event.ActionEvent;
++import java.awt.event.ActionListener;
++
++import javax.swing.GroupLayout;
++import javax.swing.GroupLayout.Alignment;
++import javax.swing.JButton;
++import javax.swing.JFrame;
++import javax.swing.JPanel;
++
++public class MainFrame {
++
++	public JFrame frmMainframe;
++
++	/**
++	 * Launch occurs in CheckBoxGUI
++	 */
++	
++	/**
++	 * Create the application.
++	 */
++	public MainFrame() {
++		
++		frmMainframe = new JFrame();
++		frmMainframe.getContentPane().setBackground(SystemColor.activeCaption);
++		
++		JPanel panel = new JPanel();
++		panel.setBackground(SystemColor.activeCaption);
++		
++		
++		GroupLayout groupLayout = new GroupLayout(frmMainframe.getContentPane());
++		groupLayout.setHorizontalGroup(
++			groupLayout.createParallelGroup(Alignment.LEADING)
++				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
++		);
++		groupLayout.setVerticalGroup(
++			groupLayout.createParallelGroup(Alignment.LEADING)
++				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
++		);
++		
++		JButton programbutton = new JButton("Πρόγραμμα");
++		programbutton.setFont(new Font("Tahoma", Font.BOLD, 15));
++		
++		JButton mapsbutton = new JButton("Χάρτες");
++		mapsbutton.setFont(new Font("Tahoma", Font.BOLD, 15));
++		
++		JButton notesbutton = new JButton("Σημειώσεις");
++		notesbutton.setFont(new Font("Tahoma", Font.BOLD, 15));
++		
++		JButton infobutton = new JButton("Πληροφορίες");
++		infobutton.setFont(new Font("Tahoma", Font.BOLD, 15));
++		
++		JButton profilebutton = new JButton("Προφίλ");
++		profilebutton.setFont(new Font("Tahoma", Font.BOLD, 16));
++		GroupLayout gl_panel = new GroupLayout(panel);
++		gl_panel.setHorizontalGroup(
++			gl_panel.createParallelGroup(Alignment.TRAILING)
++				.addGroup(gl_panel.createSequentialGroup()
++					.addContainerGap()
++					.addComponent(profilebutton, GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
++					.addGap(74)
++					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
++						.addComponent(programbutton, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
++						.addComponent(mapsbutton, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
++						.addComponent(infobutton, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
++						.addComponent(notesbutton, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))
++					.addContainerGap())
++		);
++		gl_panel.setVerticalGroup(
++			gl_panel.createParallelGroup(Alignment.TRAILING)
++				.addGroup(gl_panel.createSequentialGroup()
++					.addGap(22)
++					.addComponent(programbutton, GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
++					.addGap(18)
++					.addComponent(mapsbutton, GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
++					.addGap(18)
++					.addComponent(infobutton, GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
++					.addGap(18)
++					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
++						.addComponent(profilebutton, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
++						.addComponent(notesbutton, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
++					.addContainerGap())
++		);
++		panel.setLayout(gl_panel);
++		frmMainframe.getContentPane().setLayout(groupLayout);
++		frmMainframe.setTitle("Mainframe");
++		frmMainframe.setBounds(100, 100, 424, 280);
++		frmMainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
++		
++	
++		
++		class ActionHandler implements ActionListener{
++			@Override
++			public void actionPerformed(ActionEvent ev) {
++				if(ev.getSource() == programbutton){
++					
++					/*
++					 * 
++					 * Program()
++					 */
++				}
++				else if(ev.getSource() == mapsbutton){
++					
++					/*
++					 * 
++					 * Maps()
++					 */
++				}
++				else if(ev.getSource() == notesbutton) {
++					
++					/*
++					 * Notes()
++					 */
++				}
++				else if(ev.getSource() == infobutton) {
++					
++					/*
++					 * Infos()
++					 */
++				}
++				else if(ev.getSource() == profilebutton) {
++					
++					
++					frmMainframe.setVisible(false);
++					
++					EventQueue.invokeLater(new Runnable() { //Go to My Profile
++						public void run() {
++							try {
++								MyProfileGUI profilewindow = new MyProfileGUI();
++								profilewindow.myProfilePanel.setVisible(true);
++							} catch (Exception e) {
++								e.printStackTrace();
++							}
++						}
++					});
++					
++				}
++					
++				
++			}//actionPerformed
++			
++		}//ActionListener
++		
++		ActionListener programbuttonlistener = new ActionHandler();
++		ActionListener mapsbuttonlistener = new ActionHandler();
++		ActionListener notesbuttonlistener = new ActionHandler();
++		ActionListener infobuttonlistener = new ActionHandler();
++		ActionListener profilebuttonlistener = new ActionHandler();
++		
++		
++		programbutton.addActionListener(programbuttonlistener);
++		mapsbutton.addActionListener(mapsbuttonlistener);
++		notesbutton.addActionListener(notesbuttonlistener);
++		infobutton.addActionListener(infobuttonlistener);
++		profilebutton.addActionListener(profilebuttonlistener);
++		
++		
++	}//mainframe
++	
++	
++	
++}//Mainframe
+diff --git a/src/MyProfileGUI.java b/src/MyProfileGUI.java
+index 84da446..378688c 100644
+--- a/src/MyProfileGUI.java
++++ b/src/MyProfileGUI.java
+@@ -1,4 +1,5 @@
+ 
++import java.awt.EventQueue;
+ import java.awt.event.ActionEvent;
+ import java.awt.event.ActionListener;
+ import java.io.BufferedReader;
+@@ -18,7 +19,7 @@ public class MyProfileGUI extends JFrame{
+ 	private static final long serialVersionUID = 1L;
+ 	
+ 	
+-	private JPanel myProfilePanel;
++	public JPanel myProfilePanel;
+ 	private JTextArea nameArea;
+ 	private JTextArea selectedLessonsArea;
+ 	private JButton backButton;
+@@ -57,8 +58,21 @@ public class MyProfileGUI extends JFrame{
+ 		
+ 		backButton.addActionListener(new ActionListener() {
+ 			public void actionPerformed(ActionEvent back) {
++				
+ 				setVisible(false);
++				
++				EventQueue.invokeLater(new Runnable() { //Go Back to MainFrame
++					public void run() {
++						try {
++							MainFrame window = new MainFrame();
++							window.frmMainframe.setVisible(true);
++						} catch (Exception e) {
++							e.printStackTrace();
++						}
++					}
++				});
+ 				//new mainFrame(); 
++				
+ 			}
+ 			
+ 		});
+-- 
+2.21.0.windows.1
+
+From 97f289cfc46842d7e62644fd6c4364de19cb7960 Mon Sep 17 00:00:00 2001
+From: papsavas <papsavas@hotmail.com>
+Date: Wed, 15 May 2019 22:47:29 +0300
+Subject: [PATCH] minor bugs fixed: -Empty Checkbox at Start -Mainframe still
+ enabled after click on Profile
+
+---
+ bin/CheckBoxGUI$1ActionHandler.class | Bin 6541 -> 7012 bytes
+ bin/CheckBoxGUI$1ItemHandler.class   | Bin 2491 -> 2491 bytes
+ bin/CheckBoxGUI.class                | Bin 11525 -> 11478 bytes
+ src/CheckBoxGUI.java                 |  67 +++++++++++++--------------
+ src/MainFrame.java                   |   3 +-
+ 5 files changed, 33 insertions(+), 37 deletions(-)
+
+diff --git a/bin/CheckBoxGUI$1ActionHandler.class b/bin/CheckBoxGUI$1ActionHandler.class
+index 3e71e19eeabcffb7ccf500b305f4f7e81e193b92..9065521fd91af1dc1c256fade313432a95b113f8 100644
+GIT binary patch
+delta 1909
+zcmZ9Mdr*{B7{;IXIUnr0`ysH%ErC!p9mEJP2v{~{joO6<&CJOzs3<qVV7*M)tX4MG
+zjAZQ}I%=hpW#(nZ&=p0|N<}SA&AXL1BuUA<(M_SVpV~6JGrQ+^&hMP_z3(%-JGXB`
+zreja*raAzb(rv9H*Wt0lCx~`e7L?>y6jUa=%ai*jmy}O&=a&@OQ4^#x18P%{8W2#M
+zgH%>P)di_+Prz*x#I&y?<AH$tCfH>J-1cDCC*XDlyS@Rp%kMnx8qeq#kb8m;woB#v
+zVAn2|eZj6>F8hO>4rc7#s1F9q>_9Pxf?S_=$s7rG|0m<X=Qw8Kxc3#uypE>@@GqP-
+zaSjdMR!2|cm<_*rQ=JK^O}J>oZvt0w{?z>RDej`u^kMFTihOr@g^5d;A~4Ddrn_zU
+z-8<PCZEwaOCa&PBcdoO4d?T)#NW~I6S_I;7pb>wW_#6LtPdW$YHR7g;TUaKryURzo
+zD~ie{Ixr1iIMF09MX*3%E6lIV)z>>jNr+7h{S67!F}S?6v|yaOsJyJwlu)sGCz{DN
+z>0pXOoYhrklGr5PlzXIeb#<7B;;QZ&F<fN5H^UX}T@;xj8!S4cX`@A9t`w=&lqFlN
+zxkt~pT2!OyYm2UE`qrY<s1(^@(Kt=@7A@Aa+oHpozO$%frxe+1(GX2PSTs}90gE<j
+z`q84RnhsmkE4sTJ_2xy#dE((@XLMmA(%1t7n2kr6gD3bPM)Dzy=O9exV|a~^<1G$B
+z6^G&@4#NuOqMFZOGxJc-;W)w(ILqg8iKB6YF9<kB!ug_fX1;XiSh=6$C7T5@loRAx
+z7RyU4k%^on6&{w!ESAe$R?2+3WeKOsN=}naoGv>#L-z9xIZlr>aHd@2ENSCxcHld7
+zaSjvtF4OoPvslGP`97cI2YiknvVdN`%K3bq3-~q{YO{zRb1}c<60YM?ZsDig#brFo
+z&*(YF6>Qe3g{zcswTj>xmB6pmeXLgLT(5HIQ^UAHjbyEQnVVH1>r^GTsyDe!RdKso
+zz#VES>(wgmQnlQz>bX}P;68PN`_*|KP}h0T0FM|B9yOwP+(_aHqc=|)**s+o=IJ8i
+zDV{Y(@tiS%4Mqho7&F*p%;rU79xoZ6u-RD2E5>?WHR^cX*v%WpF}4^DylGr!o6(|R
+zw5kx4=s(mL5HQ+Mib;CrrxQ2{!B2V;kJtg;yx1sDR#v=TT8%Y&^UqokzaR~e9#F99
+z`DE9rT$O3`^5INQNa{Ld_;7wX9<D{>==hM0xFFbu<{DhyfNQQBKK$v!zd51)eet0_
+zw2t!c>wR1M7yLTcf38iiux(4~x?E(`2-8xno5k+KqP6}~QLI1vzyy>7N;wg#OqePh
+zQ7Qs4DiZya3xiY?hU@tl6^n5y0p%*un;sYA5ff3mCtbUQAwqYgFiAQ}xE@1MED;i^
+zA7Em<xFiZ8=!Ycfq;04~>oew^lcvPni7E_iMT`y2VnfqFi2s*<H!O+uhlLgTYD16d
+zu2WB|#6ioE?C(46cHg}ceG;cby4}6^Ok84QSKU(z?5Z2O>an-#=?#yMDU<~3=?ZC*
+zsOzDwt*2G3YFAmhBuLVo${gS=*!`6yK*_zj07|lS(W8MmD3q?6T>2iJg`{Ynq2K!T
+EA6KmPyZ`_I
+
+delta 1428
+zcmYk5X;76_9LAsXoCBAxFH0ANZUKpoW(YBrX~GPS`XMppgBvxI7A4}A=;dmbG<P&?
+z8XJ(Aw@IclVWwQtsZsQbY`GwdTQ0eqnqG2A+{M&{&U^1$)2H8i{>wSf|2gLk3@&}y
+zxu>hP5x`)<jm{irgcGabH?Y+lVw6WU3cw0%H?RXc&7;Nu<#%AWDIybIYeAa>tpcu@
+zc?<H==X+<&PS5t{d-A-69s_$YUqH>tU+8sUpFm8oW_I43g7ooT&x|<*PVB`21Ha&)
+zIW_VXcM}d9NI_);eiaZ-Cz^1~z;T=~H$`R+YQiZ4r}3RYgtzeD{tvLW2U>8}z&TV1
+zIHu<n<>=#__#GD=xL_tnxfKFvH?yL8J8;RsWn8Jwk4h2_+&AzS9#k)j_EAJtJ6+?1
+zdDRtXdSd$qx!z{LW@67!e3H%OHd}3qUZH%3%_5r{Y_{7>iVM}{+AO!(W|Q&#d|OgB
+zBUAYC^+tUq5;FnOjClZip$FrUOgB>57eknZ;T(q19FB<`fvFscxy;5#9F0#n24x(J
+zmCV69jz={opq`V^!dx8V8@Ry9xW*~C$9DvnC!+bTc!twNKNbkz3!EW_a;6x?Sz-bU
+z#T3pJ1@s6Hi^O7jMJX4G75q?Ca*<fiVo}SFMKc$RgIpp`vP1;9RNUdGqMOV31V5*X
+zrA%ZQQ@Nb4(&Pw!!PogECvgSyS;2YyhKsn8C0wN|Dt-KxRs4b9b2C@7fos{ybv&*k
+z7x^PQ_!B$1Q3`I7F|3ve+$#ICMy9h?X0T3XvtCZ*cKJ4U$m!fAi`XQWaJMXDo2=j-
+zS;c*F1NX~19*`|OED!OBJjJ83oyX)|9#`Px)5^&+Dwbze63?kLo>xN|P$Su{#_*EL
+z<z+RESCoexs+iZ+Qr=YMyrow0wp!0lwT1UpBOj<XK2#_8NCl)&H>6UXGE8+zrzza=
+zjv8!(K&|<#yT7kaUougTRDI3Q>Fajr^;}m&jvTB8`tfr{n0^f}`mt*bhSj0zO?TKf
+zGz)CU-Wu%RibJj=ejN4VWJb7E=MMMdOs-Xz7D`(IE1hHY{U-2LcY{?|gY&5=!Hs?R
+z!+vSXdTDqGhJJL>kTM40@<|x7Ct_tU#K|}elJUrrPhp&1za<m!o=ire?1NdlZ&XM)
+zX5)Rm(j(w1V)c;L*Pn>dBTAjQh7QeeebRN@fYN9Ars5`UAq<0%gxfkDjyt-^uv@R<
+zuH}@DM1oz2b6~Ijd0R4dQ2)z%*N}bpEc>ud@2xb`T@7Pp)*AG-j7SX`F)-1OPVHLA
+zj<F?DBx-vXRGB-Uj`eBZ<p4y;=g~(qO{N7$N(pWD-$?0r7}O>8VUM&@YSjaRgUJ7B
+qwyOTNH9Nt_h_Ey#XlakNG@=XLnhKv`y5$aBV2m}auvW!Z1o#Jk*m<@9
+
+diff --git a/bin/CheckBoxGUI$1ItemHandler.class b/bin/CheckBoxGUI$1ItemHandler.class
+index 12a92238c69ff17b203430d0dfe99ca182c4fd25..a61948666b3aecf1d8225ffdc111337c19e8526a 100644
+GIT binary patch
+delta 247
+zcmWNLy(>j=9L7J-ug*F5x{;i&@|wZL;L;f|Nq10IlmEbIV~|zszXc<rEZl^+B7>3W
+zCP`$m2zgB@FW>Fy>GSD%N^vRPm<crRXM?fqA{APqPRlfEg?6pdt2Lhq$CGuOiiFxE
+zr7berrdm7HXqT+^sMkJCI-o^|<a9)bj(ss)NKVW;CDIv{Iya+i^o5a^MqbgTYr1qp
+zqFefO$AIqrR5X`=Akd?2JW-`*V!hCySDN)ktKR9<2i^LlM_=^o+ZR&h{EzMY+Ot1u
+c9ps!CbdDkGhF!pj3mJ706PBl4+85H3|72i1n*aa+
+
+delta 247
+zcmWNLy(@)r9K}E9r{~_wjpXSnuNk}zE<FP#=?=<j@*fy&46=&-my!WdcagY6@?<a)
+zNjHfs79p=G<u%{!bozWcCl2FqV>-~Rp9w}Y3zTV*8ZA+;W!khtkMcg97>ibMS|g!#
+zQYw(vCY9QvO50?#L#=jc&>l^SY0*CII`D<Wd~|5m5lJ0Wt`jp(jXpE7XyiGqx}Z~+
+zM7p9^*YxYgPbTNGw*<Pgje9EeK&VIR^hBecY1RuJdZkNmbnBfyefV6enEkY!FMIY)
+ewSMfuF9Z5x(7GWfhMi-?l`w93$^|}GI`I!%c0RNK
+
+diff --git a/bin/CheckBoxGUI.class b/bin/CheckBoxGUI.class
+index 5522cb04662b1a716a9a184790cdb492e552fb20..a90c54b0a979e89d15d912903238b82008fc1e57 100644
+GIT binary patch
+delta 2542
+zcmZYAd3aRS83yq8J?Gqe&)gY8GBM~7fe>~HOF)rLAO@14VVx`vB!oZ$WFY|(5>|%_
+z6|rtOrAQG}tX)*Bm^x7baltipsNzzfD1yqOC=?4tTzUdN_IdQL`@7#c-?`seo_l^h
+z<^9l;rBZ54iuAF%X1d5k(1$#9B;xAI>+@=BtMe-6<&`h0cThmIsVr?M?N{1Z-!H4S
+zre5PF!pc}sQCjUHA5(nrU}|KI>}VJJFbyS<t+F#qBYR}G@Ju59Vs3S5&Fp@``UMp=
+zvo*>Ie{5as`Pk#J9kJ%v&e*P$0kK^gvws=Cx;0)wB>t@bAd{m}^~;38v0W~vV{U6v
+zHC>2yJ*VdWzk&%fD$8fq59?LXI^%gh%*TSrI+bP?qCVnPX>5oLRs&KpvB-zT7-mK{
+zi!rWrQN`Sab0^m}X4Wojo&D0t5tU{;SWYBGGW<!Ax2!K2Y}#S>wOQQsxo?Otk8W)T
+zx}JgPgnodxbEGt|JRETR6Qh_MaJC~q<S$h5-e!cNC~6H%4>>zABP9K0!I1LL3WhBI
+zoM6cIR|cC=9YyVSWQLkCW~dJ6pJ(fM-!sUHBDb|^ddRvoPF?Fb3xCWGXe$cc7|{MD
+zrhrI!`{QJ!IQjB)Hsg+=@qu_1#a#gvh>zm8h1;<#bTOU~Ncb_H@Kd~LPx3peyD9&u
+zjBj(X{NvkkIOIRkjL(Lq22w8;_hVbrYbgzMFZFF}`bM%-dwKIiiHyIL8(Er~V+A@y
+zncVbp>IKSK3`Jh-Ix?J(RVctZ6yjM-!AqEmy(q##6yuyZUf-dF${dws%wcD9G<u?v
+z{V|u>sNp!&G9U9<jRjnQIxfLNu0;daqmd6_38Prb9azTQxS0nK=EqpU<G6)qu#)Go
+zN)WdSZy2jZ0&Wul{6=)a9ikWR6zRBI48uJl18c=ttP?@}PK2;tlwyOZ!tcd=Y!r*J
+zNvy<Xu?7!_wRlKu#1`=o9u|MWBccg^6wl&M;zc|vTJV^78;^^9ctRY(U&V1eDNf@l
+zaRE(|_?rxS5S58&mH|8?JL5Uo8{1_%cE}-kUS?vK9E%s^B)lw(uv<>UD{>ZIl~s66
+z&co|+nQ<6z$W?e#u0e}jXM7+2E;r#Vxdk!#gz+})kx~3ZZpYj5HRCt&j@*O2@?E?u
+z58<7#Jc9S+F}yEN;sbf!_*?u_5&M*l{mO5ggafKQ{-rwMpz3Yh7ayvD_(%=LAvM}K
+z8y~A&99ENXL=_uP$0w>BpQ=iHrW%YF<EXkB$J9z3S9crVixX-+K3DhS3-xD&PpHRm
+zQay<;)zkP&y=c4}r_>ubtz!7M+HZUiXVhVQt&ZY9>WuMOoK+Wa&I0~x`Eb^1i}TiH
+z_{Iw0g4NBqC%(1%;5%yozPCmgXW$1b%lyM`B&|Z@DHK)-rBy~{%?q2CI$G8u+SXD!
+z)@o|&4tlKhbgfM${vdW+57TEo!Zy}c##v9Xt<}tU>jfrQE%aOO8}DPH^${<#K4Fq|
+zjP0zGyxcm?E3C5&Sl_U{^#hY_$t!Km4z`aS?F4qRlbB++XJ<Ryk*RhUcCmY~tDVMf
+zc7JxauVD{+2z%P2*~`x1Rd$fQ?Lwy6GuX$T#lH4@_OlnVzrBL#_9_mr@8&=|!mI7g
+zyvE+bLH1T&Yj5LVdk2TuFL0>c!eRCv4!8F+&OS(=eTXCMqa0<Q;`L$sJV!f<W1J*r
+zJ1NX@(s`pZoViXe$2sFU-YMV&XDTN;(>Teg<YcFoL8p;<&NAjZt6AXO$wKEo^S+Tc
+zIggsQtqeI&bBgmEr#ib><g^&aSnTZOG-n@6oDVtO`PjUFV)`9rc!G1neCQ-+IA3w5
+zbB<+NvRr#PODA%+PURfk*EpROdJrr12v+GVR_jTetBZ_FSfk5Kd^T%!waKgH3~l}f
+zdO7R#O4jS!*`OnA)El@+Kgh*;8<*;xT&7><a{VU5dT*F3^r!rl{(`sYuenlR;3|*9
+zHJ&)$?&)BjSMg3yKi=yZ#fT?Irh9Ia13a(Gfv%QUyE$@@J3(IS7RbSFu^i%-$)RqQ
+z9Of>N!`;R5I(LN};jWe=-Mi!{cb&{|@0ZuR56evVQ90V(CdatX$SgO!OJ=*T${hDC
+zIo5qw-rydPx$a>(&OI(CxTj>$OPS~O%K~pe7J5@;5w8Py82wxC8IIsc06uRLM==A$
+z5ce3bXC?$P+(R7AF_5^y{eW3U3PCr<Z05kiO!s+?<qfb=7j~cEjm(9Em)sJLGtx|U
+zZI0&zc$n?k&xuAZt36M1l988dJ@;_3k&jVN6@x}?c)*jzJfk?C@$_ZBQCs2lw4*sY
+zh!<V-_bfC@5X1CmyvfKff;z^KQ8-al=_scdUM5!R&75kKBsS_>S!C2sH0c@^8(l71
+zbOEOsT_KK`b5LRw5EpcJPB&^V6LlO*jgn<==PYL!T`4ooVVh~xK^8f$u#DyCXrEH)
+zoMl#_lYL(G<m|9vilbBq&Vfc}Cq<DJMybwl`KehIjV?~Ee2<kTxvO3-{=h18;dIjx
+zaTn*Z2Ho{eQN~&m>!J6G@tkL3Jw0A@;(T){_43@t4Xk6m(d%Zu3yrRFH3Mug>h0zr
+zcOM%K)4W6q7jZHAc>QS0B}RR@)a-7G*~3fwy6mTYUH;R)-VDXC>2)i_51zQl(6pBS
+E0Z^!b&j0`b
+
+delta 2512
+zcmZYAdvq1W9S895cV~BIb~li4F@#Hygg_uj01;F|REUA_N`R06xdenH1PFxiNC=Mr
+zS5TuA4`?rncn~UTeLraA#u^k6tPg5HQ3_I9Kv5%Ai%OMZYbW5L=d^##XMXeh&Dq)C
+zo}DA1JEpu)BGMG{i8gafYD@Z+EUoF6v!JR*qkwR-7FU#1dKiz1F>o;{azJ#EMKK6r
+zO5_{Sl~W__?9_x?h`5Wjl_gcP`xVqIuBe)=F(aa!be2X2I@k0r#?03Ga-u_8aqfR}
+z$Cb`4FRRJyHOWIZX2)O-Dk4Yiblp0g7lX=3r4wXTq~1yI(i&PAgGJ~<w5=|$DO|9i
+zvan)dVfixisMV2~qPx&o63Md@f=h`&^L@>)Hb2w6yScIXmF7Lk1Dp3~ERU?RJ9e)7
+z|J6awdlXg?@sX@ReB@o{Yc6cqE&ECqHJpjbu*{GeJHT^Gk%WGLUl=I~t_n9HJJg8b
+zgLP0hVSFes!H)AAQ5ePKppJ`q2{}>Zwk{QioL4X{Bm&b5LUy2}pb=$J%nE8Jin&1@
+zm><Q0pb9L$IQ;KMs<m8QDz9lRuPq2Ufn^0D8PF?!*(p-qsU@~|6szN86l-5YeH3>^
+z#w8|PdoiXi#~N|>;J9F%9mR&A9gK@&)8r<s3|-99m$M?_#Dq(`xtC)Nn-kx+dzd4B
+zF5=o;JYq`|PK5$rHsZ6vDZ!MBPyNeU!^Y%VdY5uzO>QJMrI$ZG)ShvdY9rYxBOC5X
+zxj<3MqR58sL&B3#kIC4KB0Oxqt0qjrUKHak%)mjE-~>u(V-^!Jn_V%7X{g}UsN@LD
+zXCA6J5er#~MO=)<T!9+iizVEQT5iX3MzMmsQOEtJx5u%XClO`~)>y<^OW`&v7I#=Z
+z!>G6V;7;pW{L0G1daD3;TgBL5Rb!*I9QRmju*q7F`>cC$zqJJqSdU<f^&}p&c4Dj5
+zgomuX*k-+r-&lw7uyqVOtdn@uI)lfov-qub9#0B^r-X~AMLRqz67ihqiswZy>=Xm=
+zJCT6~5zfLcF$PhQk46!~??oA278Pg`i|~r5!>eKq_K0<OU2MWWaX<EpZFoaGf<K5S
+z@TPdtxDjuO-FRE<#XI6%<3l(gKExlzM|f9!X54~i@ih*L?{G-`jAq-yd$z*+b_@>N
+z9r0e+PQ(XxGCs6Zam4O#JP?1fGjP<t3CHZw#(DV2o`B=_Wc=AKGoFQy?Rof%y%2x3
+zR~m<L!oD3R?R7Y1-)H;)KCvIdr}hq<wx2WJiO<YO_qpAKFYGss-$9Fg5MSCK;Ea6&
+z;THQ7{LTIXU)f*bYx}(MPx!_m{_aSebppom_}1x!@0=uj@ANkAi*wEZ{KFZ9ADm&v
+zBk-e>i}OxC{^?9Jo`DNaIev2H;$Kd!@pAmzS&g5a+sqGbqw%jvXEQBlD~0n!*i4?L
+z?Yuz8X`poWP&xalor83p4^8|i_BqGtJ0CN~In6fCmu%~N!&v7>#!10;vMpm}I|gI|
+z+sn?pLMAg_rm}<V#RS=x9pyC)%In!lW-?I@WoJ2zSISZBBJ-FeCooxtC$Xz6W{RB7
+zZgM8O%Q;My^Vvf#Vo$k}Y4TR~lIwYu+{oVYL8i-X>?5CKU->Ni$(MMw+|B;-O<p4p
+zaDY6*f$}3>D^K$}*~07P_Z%dDWQGzPtQ0d<fNfMfebtdSsw56kY0L_%{>)Z4aG1(t
+zjw<2^Rl(7!hGW$2%vJTwQyVx|ML15~&+%#p^VQ>=pq^)edXa@{4=1WOI7uBc^TV91
+zPMNjSEK*-Fq`u`8^#hBwU`R_&)jp@`cDzM*;B*}{^Uf^NNeqwGDa_TWEYUq#s{64_
+zXL6>_X1N~2S$Ya*>siJXoTIB)p=&u;ujV|xj+J_o@n+7~TTOgBtMsF$?s2ovQ(UBX
+zaj|Y<wSJvT^a0lD_qbFa<ucvE75W_O^aZYTEv|O`FvISZyw&Z_HEufBx&wHdJA`+-
+zIlRlAXvR`*aI3k|trOR|P2zg@f*9mwiVUw#WO{4G4c<C&qj!(E$=fW3c-zEK?=g|(
+zJtJ=R8br4DvKZ#=6~n!^M2>e*jPQ<#k>1B*l=rC^?VS;0yl+LW7d|iYe2B5W665@~
+zBHxb}6a3Di(C;RS{DC6m4;RILu9)f<h!Wli@D#3Yy@PlYhX9E2M{+2$KxFudyqVds
+zkma}MFb;>nXy0Rwk&ObM9Kn%rQ0ATGD2|3iwRe(Z!pwz2z1Pe<Bh5rFgJU@kE=PE6
+zINr!(rTYc*jeOqg?&Acb7)IS~EHG-r<L+`68nw0P7I30btku))!%0SQR-UUk*{GdW
+ztxvMZC}6GEZ!=`n-g-obcXEp16;_kp!eXO%>#$zKsYV^FGp6s;j1q*<`Mkxbqe#>l
+zoNg2p19Vr;FzO`6XqP2MiK0xMWvNkTQKycv%;-w7NxjCIEJqiWW~XzOc?(IZzuk?q
+zjgrIa2D>BYK%=WF5<juRC`HwX6XvaGbW^vBL!4`hyX#%ncFr@GO{zX%t>b)Fp@%+a
+zP3Hm=>*@N|C@wUyG&dVbY`u_rxlP={YStKCFy~!jbd{IMAZv|!dv!R*r5ss<bbla{
+uxs1!v#~+SZt}yD$I@8@`)5A-BU3s~$t1kC-HEf1WRz0kr-JFP@e&9dCsAS~;
+
+diff --git a/src/CheckBoxGUI.java b/src/CheckBoxGUI.java
+index 60bc6af..fa15fe9 100644
+--- a/src/CheckBoxGUI.java
++++ b/src/CheckBoxGUI.java
+@@ -82,6 +82,10 @@ public class CheckBoxGUI {
+ 					
+ 					JComboBox comboBoxS = new JComboBox();
+ 					comboBoxS.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
++					comboBoxS.setToolTipText("-Επιλέξτε Εξάμηνο-");
++					comboBoxS.setFont(new Font("Arial", Font.BOLD, 11));
++					comboBoxS.setModel(new DefaultComboBoxModel(new String[] {"Εξάμηνο 2ο", "Εξάμηνο 4ο", "Εξάμηνο 6ο ", "Εξάμηνο 8ο"}));
++					
+ 					
+ 					JComboBox comboBoxD = new JComboBox();
+ 					comboBoxD.setFont(new Font("Arial", Font.BOLD, 11));
+@@ -93,9 +97,6 @@ public class CheckBoxGUI {
+ 					
+ 	
+ 					
+-					comboBoxS.setToolTipText("-Επιλέξτε Εξάμηνο-");
+-					comboBoxS.setFont(new Font("Arial", Font.BOLD, 11));
+-					comboBoxS.setModel(new DefaultComboBoxModel(new String[] {"Εξάμηνο 2ο", "Εξάμηνο 4ο", "Εξάμηνο 6ο ", "Εξάμηνο 8ο"}));
+ 					
+ 					
+ 						
+@@ -126,20 +127,20 @@ public class CheckBoxGUI {
+ 						checkBox6.setVerticalAlignment(SwingConstants.TOP);
+ 						arcboxes.add(checkBox6);
+ 						
+-						JCheckBox checkBox7 = new JCheckBox(re.getCoursesStats().get(6).getName());
++						JCheckBox checkBox7 = new JCheckBox((String) null);
+ 						checkBox7.setVerticalAlignment(SwingConstants.TOP);
+ 						arcboxes.add(checkBox7);
+ 						
+-						JCheckBox checkBox8 = new JCheckBox(re.getCoursesStats().get(7).getName());
++						JCheckBox checkBox8 = new JCheckBox((String) null);
+ 						checkBox8.setVerticalAlignment(SwingConstants.TOP);
+ 						arcboxes.add(checkBox8);
+ 						
+ 						
+-						JCheckBox checkBox9 = new JCheckBox(re.getCoursesStats().get(8).getName());
++						JCheckBox checkBox9 = new JCheckBox((String) null);
+ 						checkBox9.setVerticalAlignment(SwingConstants.TOP);
+ 						arcboxes.add(checkBox9);
+ 						
+-						JCheckBox checkBox10 = new JCheckBox(re.getCoursesStats().get(9).getName());
++						JCheckBox checkBox10 = new JCheckBox((String) null);
+ 						checkBox10.setVerticalAlignment(SwingConstants.TOP);
+ 						arcboxes.add(checkBox10);
+ 						
+@@ -388,10 +389,13 @@ public class CheckBoxGUI {
+ 						
+ 							
+ 							
++						
+ 						for(int i=7; i<arcboxes.size();i++) {
+ 							arcboxes.get(i-1).hide();
+ 						}
+ 						
++							checkBox21.hide(); //bug 
++						
+ 
+ 									
+ 		
+@@ -501,7 +505,7 @@ public class CheckBoxGUI {
+ 				
+ 			}
+ 			
+-			public void setCheckBoxes(int start, int end) {
++			public void setCheckBoxes(int start, int end) { //!lag
+ 				int checkboxcounter=0;
+ 				for(int cindex = start; cindex<=end;cindex++) {
+ 					arcboxes.get(checkboxcounter).show();
+@@ -548,16 +552,7 @@ public class CheckBoxGUI {
+ 					
+ 					
+ 				
+-				
+-				/*
+-				 * 
+-				 * 
+-				 *   KLHSH EPOMENOU PARATHIROU
+-				 *   UKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+-				 * 
+-				 * 
+-				 * 
+-				 */
++			
+ 				}
+ 				
+ 				else {
+@@ -612,7 +607,7 @@ public class CheckBoxGUI {
+ 			}
+ 			
+ 			if(checkBox5.isSelected()) {
+-				infotext.setText("tsekares to trito koutaki");
++				infotext.setText("tsekares to 5 koutaki");
+ 			     
+ 				if(ae.getSource()==addbutton) {
+ 					hashcourses.add(checkBox5.getText());
+@@ -621,7 +616,7 @@ public class CheckBoxGUI {
+ 			}
+ 			
+ 			if(checkBox6.isSelected()) {
+-				infotext.setText("tsekares to trito koutaki");
++				infotext.setText("tsekares to 6 koutaki");
+ 			     
+ 				if(ae.getSource()==addbutton) {
+ 					hashcourses.add(checkBox6.getText());
+@@ -630,7 +625,7 @@ public class CheckBoxGUI {
+ 			}
+ 			
+ 			if(checkBox7.isSelected()) {
+-				infotext.setText("tsekares to trito koutaki");
++				infotext.setText("tsekares to 7 koutaki");
+ 			     
+ 				if(ae.getSource()==addbutton) {
+ 					hashcourses.add(checkBox7.getText());
+@@ -639,7 +634,7 @@ public class CheckBoxGUI {
+ 			}
+ 			
+ 			if(checkBox8.isSelected()) {
+-				infotext.setText("tsekares to trito koutaki");
++				infotext.setText("tsekares to 8 koutaki");
+ 			     
+ 				if(ae.getSource()==addbutton) {
+ 					hashcourses.add(checkBox8.getText());
+@@ -648,7 +643,7 @@ public class CheckBoxGUI {
+ 			}
+ 			
+ 			if(checkBox9.isSelected()) {
+-				infotext.setText("tsekares to trito koutaki");
++				infotext.setText("tsekares to 9 koutaki");
+ 			     
+ 				if(ae.getSource()==addbutton) {
+ 					hashcourses.add(checkBox9.getText());
+@@ -657,7 +652,7 @@ public class CheckBoxGUI {
+ 			}
+ 		
+ 			if(checkBox10.isSelected()) {
+-				infotext.setText("tsekares to trito koutaki");
++				infotext.setText("tsekares to 10 koutaki");
+ 			     
+ 				if(ae.getSource()==addbutton) {
+ 					hashcourses.add(checkBox10.getText());
+@@ -666,7 +661,7 @@ public class CheckBoxGUI {
+ 			}
+ 			
+ 			if(checkBox11.isSelected()) {
+-				infotext.setText("tsekares to trito koutaki");
++				infotext.setText("tsekares to 11 koutaki");
+ 			     
+ 				if(ae.getSource()==addbutton) {
+ 					hashcourses.add(checkBox11.getText());
+@@ -675,7 +670,7 @@ public class CheckBoxGUI {
+ 			}
+ 			
+ 			if(checkBox12.isSelected()) {
+-				infotext.setText("tsekares to trito koutaki");
++				infotext.setText("tsekares to 12 koutaki");
+ 			     
+ 				if(ae.getSource()==addbutton) {
+ 					hashcourses.add(checkBox12.getText());
+@@ -684,7 +679,7 @@ public class CheckBoxGUI {
+ 			}
+ 			
+ 			if(checkBox13.isSelected()) {
+-				infotext.setText("tsekares to trito koutaki");
++				infotext.setText("tsekares to 13 koutaki");
+ 			     
+ 				if(ae.getSource()==addbutton) {
+ 					hashcourses.add(checkBox13.getText());
+@@ -693,7 +688,7 @@ public class CheckBoxGUI {
+ 			}
+ 			
+ 			if(checkBox14.isSelected()) {
+-				infotext.setText("tsekares to trito koutaki");
++				infotext.setText("tsekares to 14 koutaki");
+ 			     
+ 				if(ae.getSource()==addbutton) {
+ 					hashcourses.add(checkBox14.getText());
+@@ -702,7 +697,7 @@ public class CheckBoxGUI {
+ 			}
+ 			
+ 			if(checkBox15.isSelected()) {
+-				infotext.setText("tsekares to trito koutaki");
++				infotext.setText("tsekares to 15 koutaki");
+ 			     
+ 				if(ae.getSource()==addbutton) {
+ 					hashcourses.add(checkBox15.getText());
+@@ -711,7 +706,7 @@ public class CheckBoxGUI {
+ 			}
+ 			
+ 			if(checkBox16.isSelected()) {
+-				infotext.setText("tsekares to trito koutaki");
++				infotext.setText("tsekares to 16 koutaki");
+ 			     
+ 				if(ae.getSource()==addbutton) {
+ 					hashcourses.add(checkBox16.getText());
+@@ -720,7 +715,7 @@ public class CheckBoxGUI {
+ 			}
+ 			
+ 			if(checkBox17.isSelected()) {
+-				infotext.setText("tsekares to trito koutaki");
++				infotext.setText("tsekares to 17 koutaki");
+ 			     
+ 				if(ae.getSource()==addbutton) {
+ 					hashcourses.add(checkBox17.getText());
+@@ -729,7 +724,7 @@ public class CheckBoxGUI {
+ 			}
+ 			
+ 			if(checkBox18.isSelected()) {
+-				infotext.setText("tsekares to trito koutaki");
++				infotext.setText("tsekares to 18 koutaki");
+ 			     
+ 				if(ae.getSource()==addbutton) {
+ 					hashcourses.add(checkBox18.getText());
+@@ -738,7 +733,7 @@ public class CheckBoxGUI {
+ 			}
+ 			
+ 			if(checkBox19.isSelected()) {
+-				infotext.setText("tsekares to trito koutaki");
++				infotext.setText("tsekares to 19 koutaki");
+ 			     
+ 				if(ae.getSource()==addbutton) {
+ 					hashcourses.add(checkBox19.getText());
+@@ -747,7 +742,7 @@ public class CheckBoxGUI {
+ 			}
+ 			
+ 			if(checkBox20.isSelected()) {
+-				infotext.setText("tsekares to trito koutaki");
++				infotext.setText("tsekares to 20 koutaki");
+ 			     
+ 				if(ae.getSource()==addbutton) {
+ 					hashcourses.add(checkBox20.getText());
+@@ -756,7 +751,7 @@ public class CheckBoxGUI {
+ 			}
+ 			
+ 			if(checkBox21.isSelected()) {
+-				infotext.setText("tsekares to trito koutaki");
++				infotext.setText("tsekares to 21 koutaki");
+ 			     
+ 				if(ae.getSource()==addbutton) {
+ 					hashcourses.add(checkBox21.getText());
+@@ -797,7 +792,7 @@ public class CheckBoxGUI {
+ 
+ 		   
+ 		    
+-		  // System.out.println(arrcourses);
++		 
+ 		   textcourses.setText(toString2(arrcourses));  
+ 		}
+ 		
+diff --git a/src/MainFrame.java b/src/MainFrame.java
+index a55ecd3..7bdedb9 100644
+--- a/src/MainFrame.java
++++ b/src/MainFrame.java
+@@ -123,7 +123,8 @@ public class MainFrame {
+ 				else if(ev.getSource() == profilebutton) {
+ 					
+ 					
+-					frmMainframe.setEnabled(false);
++					frmMainframe.setVisible(false);
++					
+ 					EventQueue.invokeLater(new Runnable() { //Go to My Profile
+ 						public void run() {
+ 							try {
+-- 
+2.21.0.windows.1
+

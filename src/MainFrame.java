@@ -125,7 +125,7 @@ public class MainFrame {
 					
 					frmMainframe.setVisible(false);
 					
-					EventQueue.invokeLater(new Runnable() { //Go to My Profile
+					EventQueue.invokeLater(new Runnable() { //Go to Profile
 						public void run() {
 							try {
 								MyProfileGUI profilewindow = new MyProfileGUI();
