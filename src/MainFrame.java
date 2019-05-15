@@ -123,7 +123,8 @@ public class MainFrame {
 				else if(ev.getSource() == profilebutton) {
 					
 					
-					frmMainframe.setEnabled(false);
+					frmMainframe.setVisible(false);
+					
 					EventQueue.invokeLater(new Runnable() { //Go to My Profile
 						public void run() {
 							try {

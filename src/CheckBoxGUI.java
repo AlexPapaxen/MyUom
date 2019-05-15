@@ -82,6 +82,10 @@ public class CheckBoxGUI {
 					
 					JComboBox comboBoxS = new JComboBox();
 					comboBoxS.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+					comboBoxS.setToolTipText("-Επιλέξτε Εξάμηνο-");
+					comboBoxS.setFont(new Font("Arial", Font.BOLD, 11));
+					comboBoxS.setModel(new DefaultComboBoxModel(new String[] {"Εξάμηνο 2ο", "Εξάμηνο 4ο", "Εξάμηνο 6ο ", "Εξάμηνο 8ο"}));
+					
 					
 					JComboBox comboBoxD = new JComboBox();
 					comboBoxD.setFont(new Font("Arial", Font.BOLD, 11));
@@ -93,9 +97,6 @@ public class CheckBoxGUI {
 					
 	
 					
-					comboBoxS.setToolTipText("-Επιλέξτε Εξάμηνο-");
-					comboBoxS.setFont(new Font("Arial", Font.BOLD, 11));
-					comboBoxS.setModel(new DefaultComboBoxModel(new String[] {"Εξάμηνο 2ο", "Εξάμηνο 4ο", "Εξάμηνο 6ο ", "Εξάμηνο 8ο"}));
 					
 					
 						
@@ -126,20 +127,20 @@ public class CheckBoxGUI {
 						checkBox6.setVerticalAlignment(SwingConstants.TOP);
 						arcboxes.add(checkBox6);
 						
-						JCheckBox checkBox7 = new JCheckBox(re.getCoursesStats().get(6).getName());
+						JCheckBox checkBox7 = new JCheckBox((String) null);
 						checkBox7.setVerticalAlignment(SwingConstants.TOP);
 						arcboxes.add(checkBox7);
 						
-						JCheckBox checkBox8 = new JCheckBox(re.getCoursesStats().get(7).getName());
+						JCheckBox checkBox8 = new JCheckBox((String) null);
 						checkBox8.setVerticalAlignment(SwingConstants.TOP);
 						arcboxes.add(checkBox8);
 						
 						
-						JCheckBox checkBox9 = new JCheckBox(re.getCoursesStats().get(8).getName());
+						JCheckBox checkBox9 = new JCheckBox((String) null);
 						checkBox9.setVerticalAlignment(SwingConstants.TOP);
 						arcboxes.add(checkBox9);
 						
-						JCheckBox checkBox10 = new JCheckBox(re.getCoursesStats().get(9).getName());
+						JCheckBox checkBox10 = new JCheckBox((String) null);
 						checkBox10.setVerticalAlignment(SwingConstants.TOP);
 						arcboxes.add(checkBox10);
 						
@@ -388,9 +389,12 @@ public class CheckBoxGUI {
 						
 							
 							
+						
 						for(int i=7; i<arcboxes.size();i++) {
 							arcboxes.get(i-1).hide();
 						}
+						
+							checkBox21.hide(); //bug 
 						
 
 									
@@ -501,7 +505,7 @@ public class CheckBoxGUI {
 				
 			}
 			
-			public void setCheckBoxes(int start, int end) {
+			public void setCheckBoxes(int start, int end) { //!lag
 				int checkboxcounter=0;
 				for(int cindex = start; cindex<=end;cindex++) {
 					arcboxes.get(checkboxcounter).show();
@@ -548,16 +552,7 @@ public class CheckBoxGUI {
 					
 					
 				
-				
-				/*
-				 * 
-				 * 
-				 *   KLHSH EPOMENOU PARATHIROU
-				 *   UKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-				 * 
-				 * 
-				 * 
-				 */
+			
 				}
 				
 				else {
@@ -612,7 +607,7 @@ public class CheckBoxGUI {
 			}
 			
 			if(checkBox5.isSelected()) {
-				infotext.setText("tsekares to trito koutaki");
+				infotext.setText("tsekares to 5 koutaki");
 			     
 				if(ae.getSource()==addbutton) {
 					hashcourses.add(checkBox5.getText());
@@ -621,7 +616,7 @@ public class CheckBoxGUI {
 			}
 			
 			if(checkBox6.isSelected()) {
-				infotext.setText("tsekares to trito koutaki");
+				infotext.setText("tsekares to 6 koutaki");
 			     
 				if(ae.getSource()==addbutton) {
 					hashcourses.add(checkBox6.getText());
@@ -630,7 +625,7 @@ public class CheckBoxGUI {
 			}
 			
 			if(checkBox7.isSelected()) {
-				infotext.setText("tsekares to trito koutaki");
+				infotext.setText("tsekares to 7 koutaki");
 			     
 				if(ae.getSource()==addbutton) {
 					hashcourses.add(checkBox7.getText());
@@ -639,7 +634,7 @@ public class CheckBoxGUI {
 			}
 			
 			if(checkBox8.isSelected()) {
-				infotext.setText("tsekares to trito koutaki");
+				infotext.setText("tsekares to 8 koutaki");
 			     
 				if(ae.getSource()==addbutton) {
 					hashcourses.add(checkBox8.getText());
@@ -648,7 +643,7 @@ public class CheckBoxGUI {
 			}
 			
 			if(checkBox9.isSelected()) {
-				infotext.setText("tsekares to trito koutaki");
+				infotext.setText("tsekares to 9 koutaki");
 			     
 				if(ae.getSource()==addbutton) {
 					hashcourses.add(checkBox9.getText());
@@ -657,7 +652,7 @@ public class CheckBoxGUI {
 			}
 		
 			if(checkBox10.isSelected()) {
-				infotext.setText("tsekares to trito koutaki");
+				infotext.setText("tsekares to 10 koutaki");
 			     
 				if(ae.getSource()==addbutton) {
 					hashcourses.add(checkBox10.getText());
@@ -666,7 +661,7 @@ public class CheckBoxGUI {
 			}
 			
 			if(checkBox11.isSelected()) {
-				infotext.setText("tsekares to trito koutaki");
+				infotext.setText("tsekares to 11 koutaki");
 			     
 				if(ae.getSource()==addbutton) {
 					hashcourses.add(checkBox11.getText());
@@ -675,7 +670,7 @@ public class CheckBoxGUI {
 			}
 			
 			if(checkBox12.isSelected()) {
-				infotext.setText("tsekares to trito koutaki");
+				infotext.setText("tsekares to 12 koutaki");
 			     
 				if(ae.getSource()==addbutton) {
 					hashcourses.add(checkBox12.getText());
@@ -684,7 +679,7 @@ public class CheckBoxGUI {
 			}
 			
 			if(checkBox13.isSelected()) {
-				infotext.setText("tsekares to trito koutaki");
+				infotext.setText("tsekares to 13 koutaki");
 			     
 				if(ae.getSource()==addbutton) {
 					hashcourses.add(checkBox13.getText());
@@ -693,7 +688,7 @@ public class CheckBoxGUI {
 			}
 			
 			if(checkBox14.isSelected()) {
-				infotext.setText("tsekares to trito koutaki");
+				infotext.setText("tsekares to 14 koutaki");
 			     
 				if(ae.getSource()==addbutton) {
 					hashcourses.add(checkBox14.getText());
@@ -702,7 +697,7 @@ public class CheckBoxGUI {
 			}
 			
 			if(checkBox15.isSelected()) {
-				infotext.setText("tsekares to trito koutaki");
+				infotext.setText("tsekares to 15 koutaki");
 			     
 				if(ae.getSource()==addbutton) {
 					hashcourses.add(checkBox15.getText());
@@ -711,7 +706,7 @@ public class CheckBoxGUI {
 			}
 			
 			if(checkBox16.isSelected()) {
-				infotext.setText("tsekares to trito koutaki");
+				infotext.setText("tsekares to 16 koutaki");
 			     
 				if(ae.getSource()==addbutton) {
 					hashcourses.add(checkBox16.getText());
@@ -720,7 +715,7 @@ public class CheckBoxGUI {
 			}
 			
 			if(checkBox17.isSelected()) {
-				infotext.setText("tsekares to trito koutaki");
+				infotext.setText("tsekares to 17 koutaki");
 			     
 				if(ae.getSource()==addbutton) {
 					hashcourses.add(checkBox17.getText());
@@ -729,7 +724,7 @@ public class CheckBoxGUI {
 			}
 			
 			if(checkBox18.isSelected()) {
-				infotext.setText("tsekares to trito koutaki");
+				infotext.setText("tsekares to 18 koutaki");
 			     
 				if(ae.getSource()==addbutton) {
 					hashcourses.add(checkBox18.getText());
@@ -738,7 +733,7 @@ public class CheckBoxGUI {
 			}
 			
 			if(checkBox19.isSelected()) {
-				infotext.setText("tsekares to trito koutaki");
+				infotext.setText("tsekares to 19 koutaki");
 			     
 				if(ae.getSource()==addbutton) {
 					hashcourses.add(checkBox19.getText());
@@ -747,7 +742,7 @@ public class CheckBoxGUI {
 			}
 			
 			if(checkBox20.isSelected()) {
-				infotext.setText("tsekares to trito koutaki");
+				infotext.setText("tsekares to 20 koutaki");
 			     
 				if(ae.getSource()==addbutton) {
 					hashcourses.add(checkBox20.getText());
@@ -756,7 +751,7 @@ public class CheckBoxGUI {
 			}
 			
 			if(checkBox21.isSelected()) {
-				infotext.setText("tsekares to trito koutaki");
+				infotext.setText("tsekares to 21 koutaki");
 			     
 				if(ae.getSource()==addbutton) {
 					hashcourses.add(checkBox21.getText());
@@ -797,7 +792,7 @@ public class CheckBoxGUI {
 
 		   
 		    
-		  // System.out.println(arrcourses);
+		 
 		   textcourses.setText(toString2(arrcourses));  
 		}
 		
